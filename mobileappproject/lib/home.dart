@@ -61,9 +61,6 @@ class Home extends StatelessWidget {
                     Colors.black.withOpacity(1),
                     Colors.black.withOpacity(1),
                     Colors.black.withOpacity(1),
-                    Colors.black.withOpacity(1),
-                    Colors.black.withOpacity(1),
-                    Colors.black.withOpacity(1),
                   ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -99,7 +96,7 @@ class Home extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 156, 156, 156),
                         fontSize: 13,
-                        height: 1.0,
+                        height: 2.0,
                       ),
                     ),
                     const Text(
