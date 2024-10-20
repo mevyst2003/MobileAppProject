@@ -47,7 +47,7 @@ class Loign extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(30),
-                  border: Border.all(color: Colors.grey),
+                  border: Border.all(color: Colors.grey.withOpacity(0.4)),
                 ),
                 child: const Row(
                   children: [
@@ -76,7 +76,7 @@ class Loign extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(30),
-                  border: Border.all(color: Colors.grey),
+                  border: Border.all(color: Colors.grey.withOpacity(0.4)),
                 ),
                 child: const Row(
                   children: [
@@ -92,7 +92,7 @@ class Loign extends StatelessWidget {
                           border: InputBorder.none,
                           hintText: "Password",
                           hintStyle: TextStyle(
-                              color: Color.fromARGB(255, 156, 156, 156),
+                              color: Colors.grey,
                               fontWeight: FontWeight.normal),
                         ),
                       ),
@@ -158,7 +158,7 @@ class Loign extends StatelessWidget {
                     height: 55,
                     width: 100,
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
+                      border: Border.all(color: Colors.grey.withOpacity(0.4)),
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: FilledButton(
@@ -183,7 +183,7 @@ class Loign extends StatelessWidget {
                     height: 55,
                     width: 100,
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
+                      border: Border.all(color: Colors.grey.withOpacity(0.4)),
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: FilledButton(
@@ -208,7 +208,7 @@ class Loign extends StatelessWidget {
                     height: 55,
                     width: 100,
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
+                      border: Border.all(color: Colors.grey.withOpacity(0.4)),
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: FilledButton(
@@ -234,7 +234,7 @@ class Loign extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Don't have account?"),
+                  const Text("Don't have an account?"),
                   TextButton(onPressed: () {}, child: const Text("Register"))
                 ],
               ),
