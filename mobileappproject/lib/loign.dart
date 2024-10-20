@@ -150,6 +150,94 @@ class Loign extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 55,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: FilledButton(
+                      onPressed: () {},
+                      style: FilledButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 20),
+                      ),
+                      child: SizedBox(
+                        width: 20,
+                        height: 30,
+                        child: Image.asset(
+                          'assets/images/facebook_logo.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  Container(
+                    height: 55,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: FilledButton(
+                      onPressed: () {},
+                      style: FilledButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 20),
+                      ),
+                      child: SizedBox(
+                        width: 30,
+                        height: 30,
+                        child: Image.asset(
+                          'assets/images/google_logo.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  Container(
+                    height: 55,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: FilledButton(
+                      onPressed: () {},
+                      style: FilledButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 20),
+                      ),
+                      child: SizedBox(
+                        width: 40,
+                        height: 30,
+                        child: Image.asset(
+                          'assets/images/apple_logo.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 90),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Don't have account?"),
+                  TextButton(onPressed: () {}, child: const Text("Register"))
+                ],
+              ),
             ],
           ),
         ),
