@@ -87,6 +87,7 @@ class Loign extends StatelessWidget {
                     SizedBox(width: 10),
                     Expanded(
                       child: TextField(
+                        obscureText: true,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: "Password",
