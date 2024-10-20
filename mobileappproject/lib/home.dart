@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileappproject/loign.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -113,7 +114,12 @@ class Home extends StatelessWidget {
                       child: SizedBox(
                         width: 400,
                         child: FilledButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context, 
+                              MaterialPageRoute(builder: (context) => const Loign())
+                            );
+                          },
                           style: ButtonStyle(
                             backgroundColor:
                                 WidgetStateProperty.all<Color>(Colors.white),
