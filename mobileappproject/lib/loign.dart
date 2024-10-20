@@ -121,7 +121,7 @@ class Loign extends StatelessWidget {
                   ),
                 ),
               ),
-               const SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               const Row(
@@ -129,12 +129,11 @@ class Loign extends StatelessWidget {
                   Expanded(
                     child: Divider(
                       thickness: 1,
-                      color: Colors.grey, 
+                      color: Colors.grey,
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
                       "OR CONTINUE WITH",
                       style: TextStyle(
@@ -149,7 +148,7 @@ class Loign extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),
