@@ -101,7 +101,7 @@ class Home extends StatelessWidget {
                       ),
                     ),
                     const Text(
-                      "Experience the thrill at a lower price.",
+                      "Experience the thrill ar a lower price.",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 156, 156, 156),
