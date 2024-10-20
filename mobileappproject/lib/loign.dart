@@ -8,6 +8,7 @@ class Loign extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -36,11 +37,11 @@ class Loign extends StatelessWidget {
                 "Login to your account",
                 style: TextStyle(
                   color: Color.fromARGB(255, 156, 156, 156),
-                  fontSize: 15,
-                  height: 1.5,
+                  fontSize: 17,
+                  height: 2,
                 ),
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 45),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
@@ -98,7 +99,57 @@ class Loign extends StatelessWidget {
                   ],
                 ),
               ),
-              FilledButton(onPressed: (){}, child: Text("Login"))
+              const SizedBox(
+                height: 45,
+              ),
+              SizedBox(
+                height: 53,
+                width: 400,
+                child: FilledButton(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all<Color>(
+                        const Color.fromARGB(255, 31, 31, 31)),
+                  ),
+                  child: const Text(
+                    "Login",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
+               const SizedBox(
+                height: 25,
+              ),
+              const Row(
+                children: [
+                  Expanded(
+                    child: Divider(
+                      thickness: 1,
+                      color: Colors.grey, 
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 10),
+                    child: Text(
+                      "OR CONTINUE WITH",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Divider(
+                      thickness: 1,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),
