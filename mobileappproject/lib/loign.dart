@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:mobileappproject/register.dart';
 
 class Loign extends StatelessWidget {
   const Loign({super.key});
@@ -235,7 +235,14 @@ class Loign extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text("Don't have an account?"),
-                  TextButton(onPressed: () {}, child: const Text("Register"))
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Register()));
+                      },
+                      child: const Text("Register"))
                 ],
               ),
             ],
