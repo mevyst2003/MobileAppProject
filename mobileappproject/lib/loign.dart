@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mobileappproject/register.dart';
+import 'package:mobileappproject/Cartypelist1.dart';
 
 class Loign extends StatelessWidget {
-  const Loign({super.key});
+  Loign({super.key}); // Changed to non-const constructor
+
+  // TextEditingControllers to capture user input
+  final TextEditingController loginController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +17,7 @@ class Loign extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pop(context); // Navigate back
           },
         ),
       ),
@@ -42,6 +47,8 @@ class Loign extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 45),
+
+              // Login TextField
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
@@ -49,21 +56,23 @@ class Loign extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                   border: Border.all(color: Colors.grey.withOpacity(0.4)),
                 ),
-                child: const Row(
+                child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.person_outline_rounded,
                       color: Color.fromARGB(255, 156, 156, 156),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: TextField(
-                        decoration: InputDecoration(
+                        controller: loginController, // Capture login input
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: "Login",
                           hintStyle: TextStyle(
-                              color: Color.fromARGB(255, 156, 156, 156),
-                              fontWeight: FontWeight.normal),
+                            color: Color.fromARGB(255, 156, 156, 156),
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
                       ),
                     ),
@@ -71,6 +80,8 @@ class Loign extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 13),
+
+              // Password TextField
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
@@ -78,39 +89,63 @@ class Loign extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                   border: Border.all(color: Colors.grey.withOpacity(0.4)),
                 ),
-                child: const Row(
+                child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.lock_outline_rounded,
                       color: Color.fromARGB(255, 156, 156, 156),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
+                        controller: passwordController, // Capture password input
+                        obscureText: true, // Hide input
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: "Password",
                           hintStyle: TextStyle(
-                              color: Colors.grey,
-                              fontWeight: FontWeight.normal),
+                            color: Colors.grey,
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 45,
-              ),
+              const SizedBox(height: 45),
+
+              // Login Button
               SizedBox(
                 height: 53,
                 width: 400,
                 child: FilledButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // Retrieve input values
+                    String login = loginController.text;
+                    String password = passwordController.text;
+
+                    // Basic validation logic
+                    if (login.isNotEmpty && password.isNotEmpty) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Cartypelist1(), // Navigate to HomePage
+                        ),
+                      );
+                    } else {
+                      // Show error message
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please enter both login and password.'),
+                        ),
+                      );
+                    }
+                  },
                   style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all<Color>(
-                        const Color.fromARGB(255, 31, 31, 31)),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      const Color.fromARGB(255, 31, 31, 31),
+                    ),
                   ),
                   child: const Text(
                     "Login",
@@ -122,9 +157,9 @@ class Loign extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 25,
-              ),
+              const SizedBox(height: 25),
+
+              // OR CONTINUE WITH Section
               const Row(
                 children: [
                   Expanded(
@@ -137,9 +172,7 @@ class Loign extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
                       "OR CONTINUE WITH",
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
+                      style: TextStyle(color: Colors.black),
                     ),
                   ),
                   Expanded(
@@ -151,101 +184,66 @@ class Loign extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
+
+              // Social Login Buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    height: 55,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.withOpacity(0.4)),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: FilledButton(
-                      onPressed: () {},
-                      style: FilledButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 20),
-                      ),
-                      child: SizedBox(
-                        width: 20,
-                        height: 30,
-                        child: Image.asset(
-                          'assets/images/facebook_logo.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
+                  _buildSocialButton('assets/images/facebook_logo.png'),
                   const SizedBox(width: 20),
-                  Container(
-                    height: 55,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.withOpacity(0.4)),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: FilledButton(
-                      onPressed: () {},
-                      style: FilledButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 20),
-                      ),
-                      child: SizedBox(
-                        width: 30,
-                        height: 30,
-                        child: Image.asset(
-                          'assets/images/google_logo.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
+                  _buildSocialButton('assets/images/google_logo.png'),
                   const SizedBox(width: 20),
-                  Container(
-                    height: 55,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.withOpacity(0.4)),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: FilledButton(
-                      onPressed: () {},
-                      style: FilledButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 20),
-                      ),
-                      child: SizedBox(
-                        width: 40,
-                        height: 30,
-                        child: Image.asset(
-                          'assets/images/apple_logo.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
+                  _buildSocialButton('assets/images/apple_logo.png'),
                 ],
               ),
               const SizedBox(height: 90),
+
+              // Register Link
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text("Don't have an account?"),
                   TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Register()));
-                      },
-                      child: const Text("Register"))
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Register(), // Navigate to Register page
+                        ),
+                      );
+                    },
+                    child: const Text("Register"),
+                  ),
                 ],
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Helper method to build social login buttons
+  Widget _buildSocialButton(String imagePath) {
+    return Container(
+      height: 55,
+      width: 100,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.withOpacity(0.4)),
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: FilledButton(
+        onPressed: () {},
+        style: FilledButton.styleFrom(
+          backgroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        ),
+        child: SizedBox(
+          width: 40,
+          height: 30,
+          child: Image.asset(
+            imagePath,
+            fit: BoxFit.cover,
           ),
         ),
       ),

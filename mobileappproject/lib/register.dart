@@ -1,10 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:mobileappproject/loign.dart';
 
 class Register extends StatelessWidget {
   const Register({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var filledButton = FilledButton(
+                  onPressed: () {
+                    // Navigate to Complete Registration Page
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Loign(),
+                      ),
+                    );
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      const Color.fromARGB(255, 31, 31, 31),
+                    ),
+                  ),
+                  child: const Text(
+                    "Register",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -61,14 +86,15 @@ class Register extends StatelessWidget {
                           border: InputBorder.none,
                           hintText: "Login",
                           hintStyle: TextStyle(
-                              color: Color.fromARGB(255, 156, 156, 156),
-                              fontWeight: FontWeight.normal),
+                            color: Color.fromARGB(255, 156, 156, 156),
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
-              ), 
+              ),
               const SizedBox(height: 13),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -90,8 +116,9 @@ class Register extends StatelessWidget {
                           border: InputBorder.none,
                           hintText: "Email",
                           hintStyle: TextStyle(
-                              color: Color.fromARGB(255, 156, 156, 156),
-                              fontWeight: FontWeight.normal),
+                            color: Color.fromARGB(255, 156, 156, 156),
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
                       ),
                     ),
@@ -120,15 +147,16 @@ class Register extends StatelessWidget {
                           border: InputBorder.none,
                           hintText: "Password",
                           hintStyle: TextStyle(
-                              color: Colors.grey,
-                              fontWeight: FontWeight.normal),
+                            color: Colors.grey,
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-               const SizedBox(height: 13),
+              const SizedBox(height: 13),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
@@ -148,51 +176,35 @@ class Register extends StatelessWidget {
                         obscureText: true,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: "Password",
+                          hintText: "Confirm Password",
                           hintStyle: TextStyle(
-                              color: Colors.grey,
-                              fontWeight: FontWeight.normal),
+                            color: Colors.grey,
+                            fontWeight: FontWeight.normal,
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 45,
-              ),
+              const SizedBox(height: 45),
               SizedBox(
                 height: 53,
                 width: 400,
-                child: FilledButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStateProperty.all<Color>(
-                        const Color.fromARGB(255, 31, 31, 31)),
-                  ),
-                  child: const Text(
-                    "Register",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
+                child: filledButton,
               ),
-              const SizedBox(
-                height: 25,
-              ),
+              const SizedBox(height: 25),
               const SizedBox(height: 65),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text("Already have an account?"),
                   TextButton(
-                      onPressed: () {
-                         Navigator.pop(context);
-                      },
-                      child: const Text("Login"))
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Login"),
+                  ),
                 ],
               ),
             ],
