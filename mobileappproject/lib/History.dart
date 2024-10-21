@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobileappproject/Cartypelist1.dart';
-import 'package:mobileappproject/home.dart';
+import 'package:mobileappproject/loign.dart';
 
 class History extends StatelessWidget {
   const History({super.key});
@@ -16,7 +16,7 @@ class History extends StatelessWidget {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => Home()),
+                  MaterialPageRoute(builder: (context) => Loign()),
                   (Route<dynamic> route) => false,
                 );
               },
