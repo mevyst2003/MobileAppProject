@@ -10,10 +10,19 @@ class History extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Good Luck :)'),
+          title: const Text('Good Luck :)',style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 30,
+                      ),),
           content: const Text('Are you sure you want to log out?'),
           actions: [
-            TextButton(
+            FilledButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  const Color.fromARGB(255, 31, 31, 31),
+                ),
+              ),
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (context) => Loign()),
@@ -22,11 +31,19 @@ class History extends StatelessWidget {
               },
               child: const Text('Log out'),
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: const Text('Cancel'),
+            Container(
+              height: 40,
+              width: 90,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: const Text('Cancel',style: TextStyle(color: Colors.black),),
+              ),
             ),
           ],
         );

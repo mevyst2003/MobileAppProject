@@ -10,10 +10,19 @@ class Cartypelist1 extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Good Luck :)'),
+          title: const Text('Good Luck :)',style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 30,
+                      ),),
           content: const Text('Are you sure you want to log out?'),
           actions: [
-            TextButton(
+            FilledButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  const Color.fromARGB(255, 31, 31, 31),
+                ),
+              ),
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (context) => Loign()),
@@ -22,11 +31,19 @@ class Cartypelist1 extends StatelessWidget {
               },
               child: const Text('Log out'),
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-              child: const Text('Cancel'),
+            Container(
+              height: 40,
+              width: 90,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: const Text('Cancel',style: TextStyle(color: Colors.black),),
+              ),
             ),
           ],
         );
@@ -37,21 +54,21 @@ class Cartypelist1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF191919),
+      backgroundColor: const Color(0xFF191919),
       appBar: PreferredSize(
         preferredSize:
             const Size.fromHeight(100), // Increase the height of AppBar
         child: AppBar(
           elevation: 0.0, // Remove elevation to make it flush with the body
-          backgroundColor: Color(0xFF191919),
-          flexibleSpace: Padding(
-            padding: const EdgeInsets.symmetric(
+          backgroundColor: const Color(0xFF191919),
+          flexibleSpace: const Padding(
+            padding: EdgeInsets.symmetric(
                 vertical: 16.0), // Adjust padding to center title properly
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     'Hertz Rental',
                     style: TextStyle(
                       fontSize: 28,
@@ -59,8 +76,8 @@ class Cartypelist1 extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(width: 4),
-                  const Text(
+                  SizedBox(width: 4),
+                  Text(
                     '.',
                     style: TextStyle(
                       fontSize: 32,
@@ -75,7 +92,7 @@ class Cartypelist1 extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color(0xFF191919),
+        backgroundColor: const Color(0xFF191919),
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white,
         currentIndex: 0,
@@ -84,13 +101,13 @@ class Cartypelist1 extends StatelessWidget {
             case 0:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Cartypelist1()),
+                MaterialPageRoute(builder: (context) => const Cartypelist1()),
               );
               break;
             case 1:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => History()),
+                MaterialPageRoute(builder: (context) => const History()),
               );
               break;
             case 2:
