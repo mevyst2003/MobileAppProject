@@ -1,35 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:mobileappproject/loign.dart';
+import 'package:mobileappproject/login.dart';
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
   const Register({super.key});
+
+  @override
+  State<Register> createState() => _Register2State();
+}
+
+class _Register2State extends State<Register> {
+  bool sP = true;
 
   @override
   Widget build(BuildContext context) {
     var filledButton = FilledButton(
-                  onPressed: () {
-                    // Navigate to Complete Registration Page
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Loign(),
-                      ),
-                    );
-                  },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                      const Color.fromARGB(255, 31, 31, 31),
-                    ),
-                  ),
-                  child: const Text(
-                    "Register",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
-                  ),
-                );
+      onPressed: () {
+        // Navigate to Complete Registration Page
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Login(),
+          ),
+        );
+      },
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color>(
+          const Color.fromARGB(255, 31, 31, 31),
+        ),
+      ),
+      child: const Text(
+        "Register",
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+          fontSize: 20,
+        ),
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -133,17 +140,17 @@ class Register extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                   border: Border.all(color: Colors.grey.withOpacity(0.4)),
                 ),
-                child: const Row(
+                child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.lock_outline_rounded,
                       color: Color.fromARGB(255, 156, 156, 156),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
+                        obscureText: sP,
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: "Password",
                           hintStyle: TextStyle(
@@ -151,6 +158,19 @@ class Register extends StatelessWidget {
                             fontWeight: FontWeight.normal,
                           ),
                         ),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          sP = !sP;
+                        });
+                      },
+                      icon: Icon(
+                        sP
+                            ? Icons.remove_outlined
+                            : Icons
+                                .remove_red_eye, // Toggle between the two icons
                       ),
                     ),
                   ],
@@ -164,17 +184,17 @@ class Register extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                   border: Border.all(color: Colors.grey.withOpacity(0.4)),
                 ),
-                child: const Row(
+                child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.lock_outline_rounded,
                       color: Color.fromARGB(255, 156, 156, 156),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
+                        obscureText: sP,
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: "Confirm Password",
                           hintStyle: TextStyle(
@@ -182,6 +202,19 @@ class Register extends StatelessWidget {
                             fontWeight: FontWeight.normal,
                           ),
                         ),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                          sP = !sP;
+                        });
+                      },
+                      icon: Icon(
+                        sP
+                            ? Icons.remove_outlined
+                            : Icons
+                                .remove_red_eye, // Toggle between the two icons
                       ),
                     ),
                   ],

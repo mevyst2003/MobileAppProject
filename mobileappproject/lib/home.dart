@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobileappproject/loign.dart';
+import 'package:mobileappproject/login.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -117,7 +117,7 @@ class Home extends StatelessWidget {
                           onPressed: () {
                             Navigator.push(
                               context, 
-                              MaterialPageRoute(builder: (context) =>  Loign())
+                              MaterialPageRoute(builder: (context) =>  const Login())
                             );
                           },
                           style: ButtonStyle(

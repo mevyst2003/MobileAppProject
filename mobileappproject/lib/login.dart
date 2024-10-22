@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:mobileappproject/Borrower/Cartypelist1.dart';
 import 'package:mobileappproject/register.dart';
-import 'package:mobileappproject/Cartypelist1.dart';
 
-class Loign extends StatelessWidget {
-  Loign({super.key}); // Changed to non-const constructor
+class Login extends StatefulWidget {
+  const Login({super.key});
 
+  @override
+  State<Login> createState() => _Login2State();
+}
+
+class _Login2State extends State<Login> {
   // TextEditingControllers to capture user input
   final TextEditingController loginController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  bool sP = true;
 
   @override
   Widget build(BuildContext context) {
@@ -97,8 +103,9 @@ class Loign extends StatelessWidget {
                     const SizedBox(width: 10),
                     Expanded(
                       child: TextField(
-                        controller: passwordController, // Capture password input
-                        obscureText: true, // Hide input
+                        controller:
+                            passwordController, // Capture password input
+                        obscureText: sP, // Hide input
                         decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: "Password",
@@ -107,6 +114,18 @@ class Loign extends StatelessWidget {
                             fontWeight: FontWeight.normal,
                           ),
                         ),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        // Toggle the state of `sP` and update the UI
+                        setState(() {
+                          sP = !sP;
+                        });
+                      },
+                      icon: Icon(
+                        sP  ? Icons.remove_outlined
+                            : Icons.remove_red_eye, // Toggle between the two icons
                       ),
                     ),
                   ],
@@ -128,14 +147,16 @@ class Loign extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Cartypelist1(), // Navigate to HomePage
+                          builder: (context) =>
+                              const Cartypelist1(), // Navigate to HomePage
                         ),
                       );
                     } else {
                       // Show error message
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Please enter both login and password.'),
+                          content:
+                              Text('Please enter both login and password.'),
                         ),
                       );
                     }
@@ -206,7 +227,8 @@ class Loign extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Register(), // Navigate to Register page
+                          builder: (context) =>
+                              const Register(), // Navigate to Register page
                         ),
                       );
                     },
@@ -220,31 +242,31 @@ class Loign extends StatelessWidget {
       ),
     );
   }
+}
 
-  // Helper method to build social login buttons
-  Widget _buildSocialButton(String imagePath) {
-    return Container(
-      height: 60,
-      width: 100,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.withOpacity(0.4)),
-        borderRadius: BorderRadius.circular(30),
+// Helper method to build social login buttons
+Widget _buildSocialButton(String imagePath) {
+  return Container(
+    height: 60,
+    width: 100,
+    decoration: BoxDecoration(
+      border: Border.all(color: Colors.grey.withOpacity(0.4)),
+      borderRadius: BorderRadius.circular(30),
+    ),
+    child: FilledButton(
+      onPressed: () {},
+      style: FilledButton.styleFrom(
+        backgroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       ),
-      child: FilledButton(
-        onPressed: () {},
-        style: FilledButton.styleFrom(
-          backgroundColor: Colors.white,
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        ),
-        child: SizedBox(
-          width: 40,
-          height: 50,
-          child: Image.asset(
-            imagePath,
-            fit: BoxFit.cover,
-          ),
+      child: SizedBox(
+        width: 40,
+        height: 50,
+        child: Image.asset(
+          imagePath,
+          fit: BoxFit.cover,
         ),
       ),
-    );
-  }
+    ),
+  );
 }
