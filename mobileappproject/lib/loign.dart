@@ -224,7 +224,7 @@ class Loign extends StatelessWidget {
   // Helper method to build social login buttons
   Widget _buildSocialButton(String imagePath) {
     return Container(
-      height: 55,
+      height: 60,
       width: 100,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.withOpacity(0.4)),
@@ -238,7 +238,7 @@ class Loign extends StatelessWidget {
         ),
         child: SizedBox(
           width: 40,
-          height: 30,
+          height: 50,
           child: Image.asset(
             imagePath,
             fit: BoxFit.cover,
