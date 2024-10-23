@@ -67,6 +67,8 @@ class Cartypelist1 extends StatelessWidget {
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text(
                     'Hertz Rental',
@@ -74,13 +76,13 @@ class Cartypelist1 extends StatelessWidget {
                       fontSize: 28,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'Montserrat',  
                     ),
                   ),
-                  SizedBox(width: 4),
                   Text(
                     '.',
                     style: TextStyle(
-                      fontSize: 32,
+                      fontSize: 45,
                       color: Colors.red,
                       fontWeight: FontWeight.bold,
                     ),
@@ -150,61 +152,63 @@ class Cartypelist1 extends StatelessWidget {
                     fontSize: 24,
                     color: Color(0xFF191919),
                     fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat', 
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
             
               // Car type selection for Sedan
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: _buildCarTypeCard(
                   context,
                   imagePath: 'assets/images/Sedan.png',
                   carType: 'Sedan',
-                  imageWidth: 340,
-                  imageHeight: 150,
+                  imageWidth: 320,
+                  imageHeight: 120,
                 ),
               ),
               const SizedBox(height: 16),
 
               // Car type selection for SUV
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: _buildCarTypeCard(
                   context,
                   imagePath: 'assets/images/SUV.png',
                   carType: 'SUV',
-                  imageWidth: 340,
-                  imageHeight: 150,
+                  imageWidth: 320,
+                  imageHeight: 120,
                 ),
               ),
               const SizedBox(height: 16),
 
               // Car type selection for Pick-up
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: _buildCarTypeCard(
                   context,
                   imagePath: 'assets/images/Pick-Up.png',
                   carType: 'Pick-up',
-                  imageWidth: 340,
-                  imageHeight: 150,
+                  imageWidth: 320,
+                  imageHeight: 120,
                 ),
               ),
               const SizedBox(height: 16),
 
               // Car type selection for EV
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: _buildCarTypeCard(
                   context,
                   imagePath: 'assets/images/EV.png',
                   carType: 'EV',
                   imageWidth: 320,
-                  imageHeight: 130,
+                  imageHeight: 120,
                 ),
               ),
+              const SizedBox(height: 16),
             ],
           ),
         ),
@@ -221,10 +225,10 @@ class Cartypelist1 extends StatelessWidget {
     required double imageHeight,
   }) {
     return Container(
-      height: 240,
+      height: 200,
       decoration: BoxDecoration(
         color: const Color(0xFFE8E8F2),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(30),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -237,13 +241,13 @@ class Cartypelist1 extends StatelessWidget {
               fit: BoxFit.contain,
             ),
           ),
-          const SizedBox(height: 10),
           Text(
             carType,
             style: const TextStyle(
               color: Color(0xFF191919),
               fontSize: 22,
               fontWeight: FontWeight.bold,
+              fontFamily: 'Montserrat',
             ),
           ),
         ],

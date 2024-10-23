@@ -38,10 +38,11 @@ class _Login2State extends State<Login> {
               const Text(
                 "Welcome back!",
                 style: TextStyle(
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.bold,
                   color: Colors.black,
                   fontSize: 30,
                   height: 1.0,
+                  fontFamily: 'Montserrat',
                 ),
               ),
               const Text(
@@ -50,6 +51,7 @@ class _Login2State extends State<Login> {
                   color: Color.fromARGB(255, 156, 156, 156),
                   fontSize: 17,
                   height: 2,
+                  fontFamily: 'Montserrat',
                 ),
               ),
               const SizedBox(height: 45),
@@ -76,7 +78,7 @@ class _Login2State extends State<Login> {
                           hintText: "Login",
                           hintStyle: TextStyle(
                             color: Color.fromARGB(255, 156, 156, 156),
-                            fontWeight: FontWeight.normal,
+                            fontFamily: 'Montserrat',
                           ),
                         ),
                       ),
@@ -111,7 +113,7 @@ class _Login2State extends State<Login> {
                           hintText: "Password",
                           hintStyle: TextStyle(
                             color: Colors.grey,
-                            fontWeight: FontWeight.normal,
+                            fontFamily: 'Montserrat',
                           ),
                         ),
                       ),
@@ -133,7 +135,7 @@ class _Login2State extends State<Login> {
                   ],
                 ),
               ),
-              const SizedBox(height: 45),
+              const SizedBox(height: 50),
               // Login Button
               SizedBox(
                 height: 53,
@@ -174,6 +176,7 @@ class _Login2State extends State<Login> {
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       fontSize: 20,
+                      fontFamily: 'Montserrat',
                     ),
                   ),
                 ),
@@ -193,7 +196,10 @@ class _Login2State extends State<Login> {
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
                       "OR CONTINUE WITH",
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Montserrat',
+                      ),
                     ),
                   ),
                   Expanded(
@@ -215,6 +221,7 @@ class _Login2State extends State<Login> {
                   _buildSocialButton('assets/images/google_logo.png'),
                   const SizedBox(width: 20),
                   _buildSocialButton('assets/images/apple_logo.png'),
+                  
                 ],
               ),
               const SizedBox(height: 90),
@@ -223,7 +230,12 @@ class _Login2State extends State<Login> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Don't have an account?"),
+                  const Text(
+                    "Don't have an account?",
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                    ),
+                  ),
                   TextButton(
                     onPressed: () {
                       Navigator.push(
@@ -234,7 +246,13 @@ class _Login2State extends State<Login> {
                         ),
                       );
                     },
-                    child: const Text("Register"),
+                    child: const Text(
+                      "Register",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
                   ),
                 ],
               ),

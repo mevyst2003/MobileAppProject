@@ -31,11 +31,12 @@ class Home extends StatelessWidget {
                   textBaseline: TextBaseline.alphabetic,
                   children: [
                     Text(
-                      "Hertz Rental",
+                      'Hertz Rental',
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
                         color: Colors.white,
                         fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat',
                       ),
                     ),
                     Text(
@@ -79,6 +80,7 @@ class Home extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 30,
                         height: 1.0,
+                        fontFamily: 'Montserrat',
                       ),
                     ),
                     const Text(
@@ -88,6 +90,7 @@ class Home extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 30,
                         height: 1.0,
+                        fontFamily: 'Montserrat',
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -98,6 +101,7 @@ class Home extends StatelessWidget {
                         color: Color.fromARGB(255, 156, 156, 156),
                         fontSize: 13,
                         height: 2.0,
+                        fontFamily: 'Montserrat',
                       ),
                     ),
                     const Text(
@@ -107,6 +111,7 @@ class Home extends StatelessWidget {
                         color: Color.fromARGB(255, 156, 156, 156),
                         fontSize: 13,
                         height: 1.0,
+                        fontFamily: 'Montserrat',
                       ),
                     ),
                     Padding(
@@ -116,9 +121,9 @@ class Home extends StatelessWidget {
                         child: FilledButton(
                           onPressed: () {
                             Navigator.push(
-                              context, 
-                              MaterialPageRoute(builder: (context) =>  const Login())
-                            );
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Login()));
                           },
                           style: ButtonStyle(
                             backgroundColor:
@@ -130,6 +135,7 @@ class Home extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                               fontSize: 15,
+                              fontFamily: 'Montserrat',
                             ),
                           ),
                         ),
