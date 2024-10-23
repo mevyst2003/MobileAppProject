@@ -54,21 +54,21 @@ class History extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF191919),
+      backgroundColor: const Color(0xFF191919),
       appBar: PreferredSize(
         preferredSize:
             const Size.fromHeight(100), // Increase the height of AppBar
         child: AppBar(
           elevation: 0.0, // Remove elevation to make it flush with the body
-          backgroundColor: Color(0xFF191919),
-          flexibleSpace: Padding(
-            padding: const EdgeInsets.symmetric(
+          backgroundColor: const Color(0xFF191919),
+          flexibleSpace: const Padding(
+            padding: EdgeInsets.symmetric(
                 vertical: 16.0), // Adjust padding to center title properly
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     'Hertz Rental',
                     style: TextStyle(
                       fontSize: 28,
@@ -76,8 +76,8 @@ class History extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(width: 4),
-                  const Text(
+                  SizedBox(width: 4),
+                  Text(
                     '.',
                     style: TextStyle(
                       fontSize: 32,
@@ -92,22 +92,19 @@ class History extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color(0xFF191919),
+        backgroundColor: const Color(0xFF191919),
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white,
         currentIndex: 0,
         onTap: (index) {
           switch (index) {
             case 0:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Cartypelist1()),
-              );
+              Navigator.pop(context);
               break;
             case 1:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => History()),
+                MaterialPageRoute(builder: (context) => const History()),
               );
               break;
             case 2:
@@ -137,9 +134,9 @@ class History extends StatelessWidget {
         ),
         child: Container(
           color: Colors.white,
-          child: Column(
+          child: const Column(
             children: [
-              const Padding(
+              Padding(
                 padding: EdgeInsets.only(
                     top: 24.0,
                     left: 32.0,
@@ -162,7 +159,7 @@ class History extends StatelessWidget {
                   ],
                 ),
               ),
-              const Expanded(
+              Expanded(
                 child: Center(
                   child: Text(
                     'No History was Found',

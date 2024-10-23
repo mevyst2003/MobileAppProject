@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mobileappproject/Borrower/Cartypelist1.dart';
 import 'package:mobileappproject/Borrower/History.dart';
-import 'package:mobileappproject/Borrower/SelectCar.dart';
 import 'package:mobileappproject/login.dart';
 
-class Cartypelist1 extends StatelessWidget {
-  const Cartypelist1({super.key});
+class Selectcar extends StatelessWidget {
+  final String carType;
+
+  const Selectcar({super.key, required this.carType});
 
   void _showLogoutDialog(BuildContext context) {
     showDialog(
@@ -29,7 +31,7 @@ class Cartypelist1 extends StatelessWidget {
               ),
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => Login()),
+                  MaterialPageRoute(builder: (context) => const Login()),
                   (Route<dynamic> route) => false,
                 );
               },
@@ -60,6 +62,25 @@ class Cartypelist1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> getCar(carType) {
+      print(carType);
+      List<Widget> car = [];
+      car = [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: _buildCarTypeCard(
+            context,
+            imagePath: 'assets/images/$carType.png',
+            carType: '$carType',
+            imageWidth: 340,
+            imageHeight: 150,
+          ),
+        ),
+        const SizedBox(height: 16),
+      ];
+      return car;
+    }
+
     return Scaffold(
       backgroundColor: const Color(0xFF191919),
       appBar: PreferredSize(
@@ -106,10 +127,7 @@ class Cartypelist1 extends StatelessWidget {
         onTap: (index) {
           switch (index) {
             case 0:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Cartypelist1()),
-              );
+              Navigator.pop(context);
               break;
             case 1:
               Navigator.push(
@@ -146,102 +164,107 @@ class Cartypelist1 extends StatelessWidget {
           color: Colors.white,
           child: ListView(
             children: [
-              const Padding(
-                padding: EdgeInsets.only(
+              Padding(
+                padding: const EdgeInsets.only(
                     top: 24.0,
                     left: 32.0,
                     right: 16.0), // Adjusted padding for "Choose your car type"
                 child: Text(
-                  'Choose your car type',
-                  style: TextStyle(
+                  'Choose your $carType car',
+                  style: const TextStyle(
                     fontSize: 24,
                     color: Color(0xFF191919),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
-
-              // Car type selection for Sedan
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: _buildCarTypeCard(
-                  context,
-                  imagePath: 'assets/images/Sedan.png',
-                  carType: 'Sedan',
-                  imageWidth: 340,
-                  imageHeight: 150,
-                ),
-              ),
-              const SizedBox(height: 16),
-
-              // Car type selection for SUV
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: _buildCarTypeCard(
-                  context,
-                  imagePath: 'assets/images/SUV.png',
-                  carType: 'SUV',
-                  imageWidth: 340,
-                  imageHeight: 150,
-                ),
-              ),
-              const SizedBox(height: 16),
-
-              // Car type selection for Pick-up
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: _buildCarTypeCard(
-                  context,
-                  imagePath: 'assets/images/Pick-Up.png',
-                  carType: 'Pick-Up',
-                  imageWidth: 340,
-                  imageHeight: 150,
-                ),
-              ),
-              const SizedBox(height: 16),
-
-              // Car type selection for EV
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: _buildCarTypeCard(
-                  context,
-                  imagePath: 'assets/images/EV.png',
-                  carType: 'EV',
-                  imageWidth: 320,
-                  imageHeight: 130,
-                ),
-              ),
+              const SizedBox(height: 10),
+              ...getCar(carType),
             ],
           ),
         ),
       ),
     );
   }
+}
 
 // Helper method to build car type cards
-  Widget _buildCarTypeCard(
-    BuildContext context, {
-    required String imagePath,
-    required String carType,
-    required double imageWidth,
-    required double imageHeight,
-  }) {
-    return GestureDetector(
-      onTap: () {
-        // Handle the action when the card is tapped
-        _handleCarTypeTap(context, carType);
-      },
-      child: Container(
-        height: 240,
-        decoration: BoxDecoration(
-          color: const Color(0xFFE8E8F2),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
+Widget _buildCarTypeCard(
+  BuildContext context, {
+  required String imagePath,
+  required String carType,
+  required double imageWidth,
+  required double imageHeight,
+}) {
+  return GestureDetector(
+    onTap: () {
+      _handleCarSelectTap(context, carType);
+    },
+    // Car card for edit code below VV
+    child: Container(
+      height: 240,
+      decoration: BoxDecoration(
+        color: const Color(0xFFE8E8F2),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Center(
+            child: SizedBox(
+              width: 370,
+              child: Row(
+                children: [
+                  Icon(Icons.circle,size: 15,color: Colors.green),
+                  Text(
+                    "Car brand",
+                    style: TextStyle(
+                      color: Color(0xFF191919),
+                      fontSize: 22,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  Spacer(),
+                  Text(
+                    "THB 1500",
+                    style: TextStyle(
+                      color: Color(0xFF191919),
+                      fontSize: 22,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const Center(
+            child: SizedBox(
+              width: 370,
+              child: Row(
+                children: [
+                  Text(
+                    "car model",//ชื่อของรุ่นรถนั้นๆในแบรนด์ที่เลือก
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 163, 163, 163),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Spacer(),
+                  Text(
+                    "day",
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 163, 163, 163),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Center(
+            child: SizedBox(
               width: imageWidth,
               height: imageHeight,
               child: Image.asset(
@@ -249,36 +272,27 @@ class Cartypelist1 extends StatelessWidget {
                 fit: BoxFit.contain,
               ),
             ),
-            const SizedBox(height: 10),
-            Text(
-              carType,
-              style: const TextStyle(
-                color: Color(0xFF191919),
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 10),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
 
 // Method to handle what happens when a car type card is tapped
-  void _handleCarTypeTap(BuildContext context, String carType) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) =>
-            Selectcar(carType: carType),
-      ),
-    );
+void _handleCarSelectTap(BuildContext context, String carName) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => Selectcar(carType: carName),
+    ),
+  );
 
-    // Or, show a simple message when a car type is selected
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('You selected $carType'),
-      ),
-    );
-  }
+  //show message when a car type is selected
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text('You selected $carName'),
+    ),
+  );
 }
