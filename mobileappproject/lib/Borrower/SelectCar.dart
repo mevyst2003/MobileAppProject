@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobileappproject/Borrower/Cartypelist1.dart';
 import 'package:mobileappproject/Borrower/History.dart';
 import 'package:mobileappproject/login.dart';
 
@@ -72,6 +71,9 @@ class Selectcar extends StatelessWidget {
             context,
             imagePath: 'assets/images/$carType.png',
             carType: '$carType',
+            carBrand: 'CarBrand',
+            carModel: 'Carmodel',
+            carPrice: 1500,
             imageWidth: 340,
             imageHeight: 150,
           ),
@@ -193,6 +195,9 @@ Widget _buildCarTypeCard(
   BuildContext context, {
   required String imagePath,
   required String carType,
+  required String carModel,
+  required int carPrice,
+  required String carBrand,
   required double imageWidth,
   required double imageHeight,
 }) {
