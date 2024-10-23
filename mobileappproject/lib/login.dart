@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobileappproject/Borrower/Cartypelist1.dart';
+import 'package:mobileappproject/home.dart';
 import 'package:mobileappproject/register.dart';
 
 class Login extends StatefulWidget {
@@ -23,7 +24,12 @@ class _Login2State extends State<Login> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context); // Navigate back
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Home(),
+              ),
+            );
           },
         ),
       ),
@@ -145,14 +151,13 @@ class _Login2State extends State<Login> {
                     // Retrieve input values
                     String login = loginController.text;
                     String password = passwordController.text;
-
                     // Basic validation logic
                     if (login.isNotEmpty && password.isNotEmpty) {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              const Cartypelist1(), // Navigate to HomePage
+                              const Cartypelist1(), // Navigate to Asset
                         ),
                       );
                     } else {
@@ -182,7 +187,6 @@ class _Login2State extends State<Login> {
                 ),
               ),
               const SizedBox(height: 25),
-
               // OR CONTINUE WITH Section
               const Row(
                 children: [
