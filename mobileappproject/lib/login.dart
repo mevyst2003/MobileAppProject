@@ -11,10 +11,10 @@ class Login extends StatefulWidget {
 }
 
 class _Login2State extends State<Login> {
-  // TextEditingControllers to capture user input
   final TextEditingController loginController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool sP = true;
+  String? _errorMessage; // Change to String to hold specific error messages
 
   @override
   Widget build(BuildContext context) {
@@ -78,10 +78,10 @@ class _Login2State extends State<Login> {
                     const SizedBox(width: 10),
                     Expanded(
                       child: TextField(
-                        controller: loginController, // Capture login input
+                        controller: loginController,
                         decoration: const InputDecoration(
                           border: InputBorder.none,
-                          hintText: "Login",
+                          hintText: "Username",
                           hintStyle: TextStyle(
                             color: Color.fromARGB(255, 156, 156, 156),
                             fontFamily: 'Montserrat',
@@ -111,9 +111,8 @@ class _Login2State extends State<Login> {
                     const SizedBox(width: 10),
                     Expanded(
                       child: TextField(
-                        controller:
-                            passwordController, // Capture password input
-                        obscureText: sP, // Hide input
+                        controller: passwordController,
+                        obscureText: sP,
                         decoration: const InputDecoration(
                           border: InputBorder.none,
                           hintText: "Password",
@@ -126,7 +125,6 @@ class _Login2State extends State<Login> {
                     ),
                     IconButton(
                       onPressed: () {
-                        // Toggle the state of `sP` and update the UI
                         setState(() {
                           sP = !sP;
                         });
@@ -134,41 +132,63 @@ class _Login2State extends State<Login> {
                       icon: Icon(
                         sP
                             ? Icons.remove_red_eye
-                            : Icons
-                                .remove_outlined, // Toggle between the two icons
+                            : Icons.remove_outlined,
                       ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 50),
+
+              // Error Message
+              const SizedBox(height: 10.0),
+              Center(
+                child: _errorMessage != null
+                    ? Text(
+                        _errorMessage!,
+                        style: const TextStyle(
+                          color: Colors.red,
+                          fontSize: 14,
+                          fontFamily: 'Montserrat',
+                        ),
+                      )
+                    : const SizedBox(height: 14), // Maintain space when no error
+              ),
+
+              const SizedBox(height: 30),
+
               // Login Button
               SizedBox(
                 height: 53,
                 width: 400,
                 child: FilledButton(
                   onPressed: () {
-                    // Retrieve input values
-                    String login = loginController.text;
-                    String password = passwordController.text;
-                    // Basic validation logic
-                    if (login.isNotEmpty && password.isNotEmpty) {
+                    String login = loginController.text.trim();
+                    String password = passwordController.text.trim();
+
+                    // Clear previous error message
+                    setState(() {
+                      _errorMessage = null;
+                    });
+
+                    // Validation logic
+                    if (login.isEmpty && password.isEmpty) {
+                      _errorMessage = "Please enter both username and password";
+                    } else if (login.isEmpty) {
+                      _errorMessage = "Please enter your username";
+                    } else if (password.isEmpty) {
+                      _errorMessage = "Please enter your password";
+                    } else {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              const Cartypelist1(), // Navigate to Asset
-                        ),
-                      );
-                    } else {
-                      // Show error message
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content:
-                              Text('Please enter both login and password.'),
+                              const Cartypelist1(),
                         ),
                       );
                     }
+
+                    // Update state to reflect changes
+                    setState(() {});
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
@@ -187,7 +207,6 @@ class _Login2State extends State<Login> {
                 ),
               ),
               const SizedBox(height: 25),
-              // OR CONTINUE WITH Section
               const Row(
                 children: [
                   Expanded(
@@ -215,8 +234,6 @@ class _Login2State extends State<Login> {
                 ],
               ),
               const SizedBox(height: 20),
-
-              // Social Login Buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -225,12 +242,9 @@ class _Login2State extends State<Login> {
                   _buildSocialButton('assets/images/google_logo.png'),
                   const SizedBox(width: 20),
                   _buildSocialButton('assets/images/apple_logo.png'),
-                  
                 ],
               ),
               const SizedBox(height: 90),
-
-              // Register Link
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -246,7 +260,7 @@ class _Login2State extends State<Login> {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              const Register(), // Navigate to Register page
+                              const Register(),
                         ),
                       );
                     },
@@ -266,31 +280,30 @@ class _Login2State extends State<Login> {
       ),
     );
   }
-}
 
-// Helper method to build social login buttons
-Widget _buildSocialButton(String imagePath) {
-  return Container(
-    height: 60,
-    width: 100,
-    decoration: BoxDecoration(
-      border: Border.all(color: Colors.grey.withOpacity(0.4)),
-      borderRadius: BorderRadius.circular(30),
-    ),
-    child: FilledButton(
-      onPressed: () {},
-      style: FilledButton.styleFrom(
-        backgroundColor: Colors.white,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+  Widget _buildSocialButton(String imagePath) {
+    return Container(
+      height: 60,
+      width: 100,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.withOpacity(0.4)),
+        borderRadius: BorderRadius.circular(30),
       ),
-      child: SizedBox(
-        width: 40,
-        height: 50,
-        child: Image.asset(
-          imagePath,
-          fit: BoxFit.cover,
+      child: FilledButton(
+        onPressed: () {},
+        style: FilledButton.styleFrom(
+          backgroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        ),
+        child: SizedBox(
+          width: 40,
+          height: 50,
+          child: Image.asset(
+            imagePath,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }

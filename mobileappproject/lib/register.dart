@@ -94,7 +94,7 @@ class _Register2State extends State<Register> {
                       child: TextField(
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: "Login",
+                          hintText: "Username",
                           hintStyle: TextStyle(
                             color: Color.fromARGB(255, 156, 156, 156),
                             fontFamily: 'Montserrat',

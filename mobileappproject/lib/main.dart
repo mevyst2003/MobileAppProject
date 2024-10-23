@@ -6,7 +6,7 @@ import 'package:mobileappproject/register.dart';
 
 void main() {
   runApp(const MaterialApp(
-    home: Cartypelist1(),
+    home: Home(),
     debugShowCheckedModeBanner: false, //ปิดแบนเนอร์ debug mode ด้านขวาบน,
   ));
 }
