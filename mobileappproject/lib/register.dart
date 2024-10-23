@@ -34,6 +34,7 @@ class _Register2State extends State<Register> {
           fontWeight: FontWeight.bold,
           color: Colors.white,
           fontSize: 20,
+          fontFamily: 'Montserrat',
         ),
       ),
     );
@@ -58,10 +59,11 @@ class _Register2State extends State<Register> {
               const Text(
                 "Register to get started!",
                 style: TextStyle(
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.bold,
                   color: Colors.black,
                   fontSize: 30,
                   height: 1.0,
+                  fontFamily: 'Montserrat',
                 ),
               ),
               const Text(
@@ -70,6 +72,7 @@ class _Register2State extends State<Register> {
                   color: Color.fromARGB(255, 156, 156, 156),
                   fontSize: 17,
                   height: 2,
+                  fontFamily: 'Montserrat',
                 ),
               ),
               const SizedBox(height: 45),
@@ -94,7 +97,7 @@ class _Register2State extends State<Register> {
                           hintText: "Login",
                           hintStyle: TextStyle(
                             color: Color.fromARGB(255, 156, 156, 156),
-                            fontWeight: FontWeight.normal,
+                            fontFamily: 'Montserrat',
                           ),
                         ),
                       ),
@@ -124,7 +127,7 @@ class _Register2State extends State<Register> {
                           hintText: "Email",
                           hintStyle: TextStyle(
                             color: Color.fromARGB(255, 156, 156, 156),
-                            fontWeight: FontWeight.normal,
+                            fontFamily: 'Montserrat',
                           ),
                         ),
                       ),
@@ -155,7 +158,7 @@ class _Register2State extends State<Register> {
                           hintText: "Password",
                           hintStyle: TextStyle(
                             color: Colors.grey,
-                            fontWeight: FontWeight.normal,
+                            fontFamily: 'Montserrat',
                           ),
                         ),
                       ),
@@ -199,7 +202,7 @@ class _Register2State extends State<Register> {
                           hintText: "Confirm Password",
                           hintStyle: TextStyle(
                             color: Colors.grey,
-                            fontWeight: FontWeight.normal,
+                            fontFamily: 'Montserrat',
                           ),
                         ),
                       ),
@@ -220,7 +223,7 @@ class _Register2State extends State<Register> {
                   ],
                 ),
               ),
-              const SizedBox(height: 45),
+              const SizedBox(height: 50),
               SizedBox(
                 height: 53,
                 width: 400,
@@ -231,12 +234,23 @@ class _Register2State extends State<Register> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Already have an account?"),
+                  const Text(
+                    "Already have an account?",
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                    ),
+                  ),
                   TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text("Login"),
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
                   ),
                 ],
               ),
