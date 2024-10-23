@@ -168,9 +168,9 @@ class _Register2State extends State<Register> {
                       },
                       icon: Icon(
                         sP
-                            ? Icons.remove_outlined
+                            ? Icons.remove_red_eye
                             : Icons
-                                .remove_red_eye, // Toggle between the two icons
+                                .remove_outlined, // Toggle between the two icons
                       ),
                     ),
                   ],
@@ -212,9 +212,9 @@ class _Register2State extends State<Register> {
                       },
                       icon: Icon(
                         sP
-                            ? Icons.remove_outlined
+                            ? Icons.remove_red_eye
                             : Icons
-                                .remove_red_eye, // Toggle between the two icons
+                                .remove_outlined, // Toggle between the two icons
                       ),
                     ),
                   ],

@@ -124,8 +124,10 @@ class _Login2State extends State<Login> {
                         });
                       },
                       icon: Icon(
-                        sP  ? Icons.remove_outlined
-                            : Icons.remove_red_eye, // Toggle between the two icons
+                        sP
+                            ? Icons.remove_red_eye
+                            : Icons
+                                .remove_outlined, // Toggle between the two icons
                       ),
                     ),
                   ],
