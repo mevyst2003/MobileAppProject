@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:mobileappproject/Borrower/History.dart';
 import 'package:mobileappproject/login.dart';
 
@@ -62,9 +63,9 @@ class Selectcar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> getCar(carType) {
-      print(carType);
       List<Widget> car = [];
       car = [
+        // เพิ่ม card ของ select car ตรงนี้ VV
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: _buildCarTypeCard(
@@ -76,9 +77,42 @@ class Selectcar extends StatelessWidget {
             carPrice: 1500,
             imageWidth: 340,
             imageHeight: 150,
+            carStatus: Colors.red
           ),
         ),
         const SizedBox(height: 16),
+        
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: _buildCarTypeCard(
+            context,
+            imagePath: 'assets/images/$carType.png',
+            carType: '$carType',
+            carBrand: 'CarBrand',
+            carModel: 'Carmodel',
+            carPrice: 1500,
+            imageWidth: 340,
+            imageHeight: 150,
+            carStatus: Colors.green //Colors.blue Colors.orange Colors.red Colors.yellow
+          ),
+        ),
+        const SizedBox(height: 16),
+        
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        //   child: _buildCarTypeCard(
+        //     context,
+        //     imagePath: 'assets/images/$carType.png',
+        //     carType: '$carType',
+        //     carBrand: 'CarBrand',
+        //     carModel: 'Carmodel',
+        //     carPrice: 1500,
+        //     imageWidth: 340,
+        //     imageHeight: 150,
+        //     carStatus: Colors.green //Colors.blue Colors.orange Colors.red Colors.yellow
+        //   ),
+        // ),
+        // const SizedBox(height: 16),
       ];
       return car;
     }
@@ -200,6 +234,8 @@ Widget _buildCarTypeCard(
   required String carBrand,
   required double imageWidth,
   required double imageHeight,
+  required Color carStatus
+  
 }) {
   return GestureDetector(
     onTap: () {
@@ -215,24 +251,24 @@ Widget _buildCarTypeCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Center(
+          Center(
             child: SizedBox(
               width: 370,
               child: Row(
                 children: [
-                  Icon(Icons.circle,size: 15,color: Colors.green),
+                  Icon(Icons.circle,size: 15,color: carStatus),
                   Text(
-                    "Car brand",
-                    style: TextStyle(
+                    carBrand,
+                    style: const TextStyle(
                       color: Color(0xFF191919),
                       fontSize: 22,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
-                    "THB 1500",
-                    style: TextStyle(
+                    "$carPrice",
+                    style: const TextStyle(
                       color: Color(0xFF191919),
                       fontSize: 22,
                       fontWeight: FontWeight.w900,
