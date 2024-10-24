@@ -11,44 +11,90 @@ class Cartypelist1 extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text(
-            'Good Luck :)',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-              fontSize: 30,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0), // Rounded corners
+          ),
+          backgroundColor: Colors.white,
+          contentPadding: const EdgeInsets.all(24), // Adjust padding as needed
+          content: Container(
+            width: MediaQuery.of(context).size.width * 0.8, // 80% of screen width
+            child: Column(
+              mainAxisSize: MainAxisSize.min, // Ensure it only takes up necessary space
+              children: [
+                // Title
+                Center(
+                  child: Column(
+                    children: const [
+                      Text(
+                        'Good luck :)',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontSize: 35,
+                          fontFamily: 'Montserrat',
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(
+                        'Are you sure you want to log out?',
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 12,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+                // Reduced space between the text and buttons
+                const SizedBox(height: 0), // Adjust space between text and buttons
+              ],
             ),
           ),
-          content: const Text('Are you sure you want to log out?'),
+          actionsAlignment: MainAxisAlignment.center, // Center the buttons
           actions: [
-            FilledButton(
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all<Color>(
-                  const Color.fromARGB(255, 31, 31, 31),
+            // "Log out" button with custom style
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black, // Black background for Log out button
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(13.0), // Rounded corners
                 ),
               ),
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => Login()),
+                  MaterialPageRoute(builder: (context) => const Login()),
                   (Route<dynamic> route) => false,
                 );
               },
-              child: const Text('Log out'),
-            ),
-            Container(
-              height: 40,
-              width: 90,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black),
-                borderRadius: BorderRadius.circular(30),
+              child: const Text(
+                'Log out',
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontSize: 16,
+                  color: Colors.white, // White text color
+                ),
               ),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(); // Close the dialog
-                },
-                child: const Text(
-                  'Cancel',
-                  style: TextStyle(color: Colors.black),
+            ),
+            // "Cancel" button with border style
+            OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(color: Colors.black), // Black border
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(13.0), // Rounded corners
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text(
+                'Cancel',
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontSize: 16,
+                  color: Colors.black, // Black text color
                 ),
               ),
             ),
@@ -63,14 +109,12 @@ class Cartypelist1 extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF191919),
       appBar: PreferredSize(
-        preferredSize:
-            const Size.fromHeight(100), // Increase the height of AppBar
+        preferredSize: const Size.fromHeight(100), // Increase the height of AppBar
         child: AppBar(
           elevation: 0.0, // Remove elevation to make it flush with the body
           backgroundColor: const Color(0xFF191919),
           flexibleSpace: const Padding(
-            padding: EdgeInsets.symmetric(
-                vertical: 16.0), // Adjust padding to center title properly
+            padding: EdgeInsets.symmetric(vertical: 16.0), // Adjust padding to center title properly
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -83,7 +127,7 @@ class Cartypelist1 extends StatelessWidget {
                       fontSize: 28,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontFamily: 'Montserrat',  
+                      fontFamily: 'Montserrat',
                     ),
                   ),
                   Text(
@@ -100,44 +144,52 @@ class Cartypelist1 extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color(0xFF191919),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white,
-        currentIndex: 0,
-        onTap: (index) {
-          switch (index) {
-            case 0:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Cartypelist1()),
-              );
-              break;
-            case 1:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const History()),
-              );
-              break;
-            case 2:
-              _showLogoutDialog(context);
-              break;
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.time_to_leave),
-            label: 'Car list',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.punch_clock),
-            label: 'Request & History',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.logout_rounded),
-            label: 'Log out',
-          ),
-        ],
+      bottomNavigationBar: Container(
+        height: 65, // Set the height of the Bottom Navigation Bar
+        child: BottomNavigationBar(
+          backgroundColor: const Color(0xFF191919),
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white,
+          currentIndex: 0,
+          onTap: (index) {
+            switch (index) {
+              case 0:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Cartypelist1()),
+                );
+                break;
+              case 1:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const History()),
+                );
+                break;
+              case 2:
+                _showLogoutDialog(context);
+                break;
+            }
+          },
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.time_to_leave, size: 25),
+              label: 'Car list',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.access_time),
+              label: 'Request & History',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.exit_to_app),
+              label: 'Log out',
+            ),
+          ],
+          selectedLabelStyle: TextStyle(
+            fontSize: 14,
+          ), // Change font size for selected label
+          unselectedLabelStyle:
+              TextStyle(fontSize: 13), // Change font size for unselected label
+        ),
       ),
       body: ClipRRect(
         borderRadius: const BorderRadius.only(
@@ -159,12 +211,12 @@ class Cartypelist1 extends StatelessWidget {
                     fontSize: 24,
                     color: Color(0xFF191919),
                     fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat', 
+                    fontFamily: 'Montserrat',
                   ),
                 ),
               ),
               const SizedBox(height: 20),
-            
+
               // Car type selection for Sedan
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -172,7 +224,7 @@ class Cartypelist1 extends StatelessWidget {
                   context,
                   imagePath: 'assets/images/Sedan.png',
                   carType: 'Sedan',
-                  imageWidth: 320,
+                  imageWidth: 330,
                   imageHeight: 120,
                 ),
               ),
@@ -185,7 +237,7 @@ class Cartypelist1 extends StatelessWidget {
                   context,
                   imagePath: 'assets/images/SUV.png',
                   carType: 'SUV',
-                  imageWidth: 320,
+                  imageWidth: 330,
                   imageHeight: 120,
                 ),
               ),
@@ -198,7 +250,7 @@ class Cartypelist1 extends StatelessWidget {
                   context,
                   imagePath: 'assets/images/Pick-Up.png',
                   carType: 'Pick-up',
-                  imageWidth: 320,
+                  imageWidth: 330,
                   imageHeight: 120,
                 ),
               ),
@@ -211,7 +263,7 @@ class Cartypelist1 extends StatelessWidget {
                   context,
                   imagePath: 'assets/images/EV.png',
                   carType: 'EV',
-                  imageWidth: 320,
+                  imageWidth: 330,
                   imageHeight: 120,
                 ),
               ),
@@ -223,7 +275,7 @@ class Cartypelist1 extends StatelessWidget {
     );
   }
 
-// Helper method to build car type cards
+  // Helper method to build car type cards
   Widget _buildCarTypeCard(
     BuildContext context, {
     required String imagePath,
