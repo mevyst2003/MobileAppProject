@@ -18,14 +18,14 @@ class History extends StatelessWidget {
           content: Container(
             width:
                 MediaQuery.of(context).size.width * 0.8, // 80% of screen width
-            child: Column(
+            child: const Column(
               mainAxisSize:
                   MainAxisSize.min, // Ensure it only takes up necessary space
               children: [
                 // Title
                 Center(
                   child: Column(
-                    children: const [
+                    children: [
                       Text(
                         'Good luck :)',
                         style: TextStyle(
@@ -48,7 +48,7 @@ class History extends StatelessWidget {
                   ),
                 ),
                 // Reduced space between the text and buttons
-                const SizedBox(
+                SizedBox(
                     height: 0), // Adjust space between text and buttons
               ],
             ),
@@ -191,11 +191,11 @@ class History extends StatelessWidget {
               label: 'Log out',
             ),
           ],
-          selectedLabelStyle: TextStyle(
+          selectedLabelStyle: const TextStyle(
             fontSize: 14,
           ), // Change font size for selected label
           unselectedLabelStyle:
-              TextStyle(fontSize: 13), // Change font size for unselected label
+              const TextStyle(fontSize: 13), // Change font size for unselected label
         ),
       ),
       body: ClipRRect(
