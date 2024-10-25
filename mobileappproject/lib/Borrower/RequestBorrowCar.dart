@@ -105,6 +105,7 @@ class Requestborrowcar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
+        // พื้นหลังภาพ
         children: [
           Container(
             decoration: BoxDecoration(
@@ -114,6 +115,7 @@ class Requestborrowcar extends StatelessWidget {
               ),
             ),
           ),
+          // แถบด้านบน (AppBar)
           Column(
             children: [
               PreferredSize(
@@ -146,8 +148,10 @@ class Requestborrowcar extends StatelessWidget {
                   ),
                 ),
               ),
+              // ส่วนเนื้อหาหลัก
               Expanded(
                 child: Container(
+                  // ภาพพื้นหลังของส่วนเนื้อหา
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("assets/images/black.jpg"),
@@ -169,6 +173,7 @@ class Requestborrowcar extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            // ข้อมูลรถ
                             Text(
                               'BMW 750e xDrive',
                               style: TextStyle(
@@ -185,6 +190,7 @@ class Requestborrowcar extends StatelessWidget {
                                 fontSize: 16,
                               ),
                             ),
+                            // สถานะการใช้งาน
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
@@ -219,6 +225,7 @@ class Requestborrowcar extends StatelessWidget {
                                   ],
                                 ),
                                 SizedBox(width: 20),
+                                // รูปรถ
                                 Container(
                                   width: 300,
                                   height: 140,
@@ -232,6 +239,7 @@ class Requestborrowcar extends StatelessWidget {
                                 ),
                               ],
                             ),
+                            // รายละเอียดฟีเจอร์
                             Container(
                               width: MediaQuery.of(context).size.width,
                               height: 850,
@@ -246,6 +254,7 @@ class Requestborrowcar extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    // ชื่อฟีเจอร์
                                     Text(
                                       'Features',
                                       style: TextStyle(
@@ -339,6 +348,7 @@ class Requestborrowcar extends StatelessWidget {
                                       ],
                                     ),
                                     SizedBox(height: 30),
+                                    // คำอธิบายรถ
                                     Text(
                                       'Car Description',
                                       style: TextStyle(
@@ -348,6 +358,7 @@ class Requestborrowcar extends StatelessWidget {
                                       ),
                                     ),
                                     SizedBox(height: 10),
+                                    // รายละเอียดคำอธิบาย
                                     Text(
                                       '           Luxury plug-in hybrid sedan featuring a 3.0-liter inline-six turbocharged engine paired with an electric motor, delivering a combined output of 490 horsepower and 700 Nm of torque. It offers xDrive all-wheel drive, an electric-only range of 50-60 km, and a 0-100 km/h time of 4.8 seconds. Equipped with an 8-speed automatic transmission, adaptive air suspension, and advanced hybrid technology, it provides a smooth, powerful, and efficient driving experience.',
                                       style: TextStyle(
@@ -367,6 +378,7 @@ class Requestborrowcar extends StatelessWidget {
                                     SizedBox(height: 20),
                                     Column(
                                       children: [
+                                        // ปุ่มให้เลือกวันที่
                                         OutlinedButton(
                                           onPressed: () {},
                                           style: OutlinedButton.styleFrom(
@@ -464,6 +476,7 @@ class Requestborrowcar extends StatelessWidget {
                                                 ],
                                               ),
                                             ),
+                                            // ปุ่มเช่ารถ
                                             ElevatedButton(
                                               onPressed: () {},
                                               style: ElevatedButton.styleFrom(
