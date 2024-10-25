@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileappproject/Admin/adminAssetlist.dart';
 import 'package:mobileappproject/Borrower/Cartypelist1.dart';
 import 'package:mobileappproject/home.dart';
 import 'package:mobileappproject/register.dart';
@@ -130,9 +131,7 @@ class _Login2State extends State<Login> {
                         });
                       },
                       icon: Icon(
-                        sP
-                            ? Icons.remove_red_eye
-                            : Icons.remove_outlined,
+                        sP ? Icons.remove_red_eye : Icons.remove_outlined,
                       ),
                     ),
                   ],
@@ -151,7 +150,8 @@ class _Login2State extends State<Login> {
                           fontFamily: 'Montserrat',
                         ),
                       )
-                    : const SizedBox(height: 14), // Maintain space when no error
+                    : const SizedBox(
+                        height: 14), // Maintain space when no error
               ),
 
               const SizedBox(height: 30),
@@ -178,13 +178,21 @@ class _Login2State extends State<Login> {
                     } else if (password.isEmpty) {
                       _errorMessage = "Please enter your password";
                     } else {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const Cartypelist1(),
-                        ),
-                      );
+                      if (login == "admin" && password == "admin") {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Adminassetlist(),
+                          ),
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Cartypelist1(),
+                          ),
+                        );
+                      }
                     }
 
                     // Update state to reflect changes
@@ -259,8 +267,7 @@ class _Login2State extends State<Login> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              const Register(),
+                          builder: (context) => const Register(),
                         ),
                       );
                     },

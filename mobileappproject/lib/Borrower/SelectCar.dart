@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mobileappproject/Borrower/History.dart';
+<<<<<<< Updated upstream
 import 'package:mobileappproject/login.dart';
 import 'package:mobileappproject/Borrower/RequestBorrowCar.dart'; 
 import 'package:mobileappproject/Borrower/Cartypelist1.dart';
+=======
+import 'package:mobileappproject/Borrower/RequestBorrowCar.dart'; // Import your Requestborrowcar class
+>>>>>>> Stashed changes
 
 class Selectcar extends StatelessWidget {
   final String carType;
