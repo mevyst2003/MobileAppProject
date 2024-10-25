@@ -158,8 +158,7 @@ class Requestborrowcar extends StatelessWidget {
                   child: ListView(
                     children: [
                       Container(
-                        margin: const EdgeInsets.only(
-                            top: 120.0), // เพิ่ม margin ด้านบน
+                        margin: const EdgeInsets.only(top: 120.0),
                         height: 1100,
                         decoration: BoxDecoration(
                           color: Color(0xFF191919),
@@ -255,9 +254,7 @@ class Requestborrowcar extends StatelessWidget {
                                         color: Colors.black,
                                       ),
                                     ),
-                                    SizedBox(
-                                        height:
-                                            20), // ระยะห่างระหว่าง 'Features' และกรอบ
+                                    SizedBox(height: 20),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -300,8 +297,7 @@ class Requestborrowcar extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        SizedBox(
-                                            width: 20), // ช่องว่างระหว่างกรอบ
+                                        SizedBox(width: 20),
                                         Expanded(
                                           child: Container(
                                             padding: EdgeInsets.all(16),
@@ -342,9 +338,7 @@ class Requestborrowcar extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
-                                        height:
-                                            30), // ระยะห่างระหว่างกรอบและ Car Description
+                                    SizedBox(height: 30),
                                     Text(
                                       'Car Description',
                                       style: TextStyle(
@@ -353,9 +347,7 @@ class Requestborrowcar extends StatelessWidget {
                                         color: Colors.black,
                                       ),
                                     ),
-                                    SizedBox(
-                                        height:
-                                            10), // ระยะห่างระหว่าง Car Description กับเนื้อหา
+                                    SizedBox(height: 10),
                                     Text(
                                       '           Luxury plug-in hybrid sedan featuring a 3.0-liter inline-six turbocharged engine paired with an electric motor, delivering a combined output of 490 horsepower and 700 Nm of torque. It offers xDrive all-wheel drive, an electric-only range of 50-60 km, and a 0-100 km/h time of 4.8 seconds. Equipped with an 8-speed automatic transmission, adaptive air suspension, and advanced hybrid technology, it provides a smooth, powerful, and efficient driving experience.',
                                       style: TextStyle(
@@ -363,9 +355,7 @@ class Requestborrowcar extends StatelessWidget {
                                         color: Colors.grey,
                                       ),
                                     ),
-                                    SizedBox(
-                                        height:
-                                            30), // ระยะห่างระหว่าง Car Description และ Date Borrow-Return
+                                    SizedBox(height: 30),
                                     Text(
                                       'Date Borrow - Return',
                                       style: TextStyle(
@@ -374,73 +364,64 @@ class Requestborrowcar extends StatelessWidget {
                                         color: Colors.black,
                                       ),
                                     ),
-                                    SizedBox(height: 20), // เพิ่มระยะห่าง
+                                    SizedBox(height: 20),
                                     Column(
                                       children: [
                                         OutlinedButton(
-                                          onPressed: () {
-                                            // ทำสิ่งที่คุณต้องการเมื่อคลิก
-                                          },
+                                          onPressed: () {},
                                           style: OutlinedButton.styleFrom(
                                             backgroundColor: Colors.white,
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 30, vertical: 15),
                                             side: const BorderSide(
-                                                color:
-                                                    Colors.grey), // กรอบสีเทา
+                                                color: Colors.grey),
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(20),
                                             ),
-                                            minimumSize: Size(double.infinity,
-                                                50), // ทำให้ปุ่มยาวเต็มบรรทัด
+                                            minimumSize:
+                                                Size(double.infinity, 50),
                                           ),
                                           child: Row(
-                                            mainAxisAlignment: MainAxisAlignment
-                                                .spaceBetween, // จัดตำแหน่งให้ห่างกัน
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               const Text(
                                                 'Date Borrow',
                                                 style: TextStyle(
-                                                  color: Colors
-                                                      .grey, // ตัวอักษรสีเทา
+                                                  color: Colors.grey,
                                                   fontSize: 16,
                                                 ),
                                               ),
                                               Icon(Icons.calendar_today,
-                                                  color: Colors.grey), // ไอคอน
+                                                  color: Colors.grey),
                                             ],
                                           ),
                                         ),
-                                        SizedBox(
-                                            height: 10), // ระยะห่างระหว่างปุ่ม
+                                        SizedBox(height: 10),
                                         OutlinedButton(
-                                          onPressed: () {
-                                            // ทำสิ่งที่คุณต้องการเมื่อคลิก
-                                          },
+                                          onPressed: () {},
                                           style: OutlinedButton.styleFrom(
                                             backgroundColor: Colors.white,
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 30, vertical: 15),
                                             side: const BorderSide(
-                                                color:
-                                                    Colors.grey), // กรอบสีเทา
+                                                color: Colors.grey),
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(20),
                                             ),
-                                            minimumSize: Size(double.infinity,
-                                                50), // ทำให้ปุ่มยาวเต็มบรรทัด
+                                            minimumSize:
+                                                Size(double.infinity, 50),
                                           ),
                                           child: Row(
-                                            mainAxisAlignment: MainAxisAlignment
-                                                .spaceBetween, // จัดตำแหน่งให้ห่างกัน
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               const Text(
                                                 'Date Return',
                                                 style: TextStyle(
-                                                  color: Colors
-                                                      .grey, // ตัวอักษรสีเทา
+                                                  color: Colors.grey,
                                                   fontSize: 16,
                                                 ),
                                               ),
@@ -484,19 +465,15 @@ class Requestborrowcar extends StatelessWidget {
                                               ),
                                             ),
                                             ElevatedButton(
-                                              onPressed: () {
-                                                // เพิ่มฟังก์ชันการทำงานที่ต้องการเมื่อกดปุ่ม
-                                              },
+                                              onPressed: () {},
                                               style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors
-                                                    .black, // สีพื้นหลังของปุ่ม
+                                                backgroundColor: Colors.black,
                                               ),
                                               child: Text(
                                                 'Rent now',
                                                 style: TextStyle(
                                                   fontSize: 16,
-                                                  color: Colors
-                                                      .white, // สีตัวอักษรเป็นสีขาว
+                                                  color: Colors.white,
                                                 ),
                                               ),
                                             )
