@@ -294,8 +294,7 @@ class Cartypelist1 extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-              builder: (context) => Selectcar(carType: carType)),
+          MaterialPageRoute(builder: (context) => Selectcar(carType: carType)),
         );
       },
       child: Container(

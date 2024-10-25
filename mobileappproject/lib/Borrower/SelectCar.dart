@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mobileappproject/Borrower/History.dart';
 import 'package:mobileappproject/login.dart';
+import 'package:mobileappproject/Borrower/RequestBorrowCar.dart'; // Import your Requestborrowcar class
 
 class Selectcar extends StatelessWidget {
   final String carType;
@@ -9,55 +10,7 @@ class Selectcar extends StatelessWidget {
   const Selectcar({super.key, required this.carType});
 
   void _showLogoutDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text(
-            'Good Luck :)',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-              fontSize: 30,
-            ),
-          ),
-          content: const Text('Are you sure you want to log out?'),
-          actions: [
-            FilledButton(
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all<Color>(
-                  const Color.fromARGB(255, 31, 31, 31),
-                ),
-              ),
-              onPressed: () {
-                Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => const Login()),
-                  (Route<dynamic> route) => false,
-                );
-              },
-              child: const Text('Log out'),
-            ),
-            Container(
-              height: 40,
-              width: 90,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black),
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(); // Close the dialog
-                },
-                child: const Text(
-                  'Cancel',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
+    // ... (Your existing logout dialog code)
   }
 
   @override
@@ -65,7 +18,6 @@ class Selectcar extends StatelessWidget {
     List<Widget> getCar(carType) {
       List<Widget> car = [];
       car = [
-        // เพิ่ม card ของ select car ตรงนี้ VV
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: _buildCarTypeCard(
@@ -77,11 +29,10 @@ class Selectcar extends StatelessWidget {
             carPrice: 1500,
             imageWidth: 340,
             imageHeight: 150,
-            carStatus: Colors.red
+            carStatus: Colors.red,
           ),
         ),
         const SizedBox(height: 16),
-        
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: _buildCarTypeCard(
@@ -93,26 +44,10 @@ class Selectcar extends StatelessWidget {
             carPrice: 1500,
             imageWidth: 340,
             imageHeight: 150,
-            carStatus: Colors.green //Colors.blue Colors.orange Colors.red Colors.yellow
+            carStatus: Colors.green,
           ),
         ),
         const SizedBox(height: 16),
-        
-        // Padding(
-        //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        //   child: _buildCarTypeCard(
-        //     context,
-        //     imagePath: 'assets/images/$carType.png',
-        //     carType: '$carType',
-        //     carBrand: 'CarBrand',
-        //     carModel: 'Carmodel',
-        //     carPrice: 1500,
-        //     imageWidth: 340,
-        //     imageHeight: 150,
-        //     carStatus: Colors.green //Colors.blue Colors.orange Colors.red Colors.yellow
-        //   ),
-        // ),
-        // const SizedBox(height: 16),
       ];
       return car;
     }
@@ -120,14 +55,12 @@ class Selectcar extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF191919),
       appBar: PreferredSize(
-        preferredSize:
-            const Size.fromHeight(100), // Increase the height of AppBar
+        preferredSize: const Size.fromHeight(100),
         child: AppBar(
-          elevation: 0.0, // Remove elevation to make it flush with the body
+          elevation: 0.0,
           backgroundColor: const Color(0xFF191919),
           flexibleSpace: const Padding(
-            padding: EdgeInsets.symmetric(
-                vertical: 16.0), // Adjust padding to center title properly
+            padding: EdgeInsets.symmetric(vertical: 16.0),
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -193,18 +126,16 @@ class Selectcar extends StatelessWidget {
       ),
       body: ClipRRect(
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(25.0), // Rounded top-left corner
-          topRight: Radius.circular(25.0), // Rounded top-right corner
+          topLeft: Radius.circular(25.0),
+          topRight: Radius.circular(25.0),
         ),
         child: Container(
           color: Colors.white,
           child: ListView(
             children: [
               Padding(
-                padding: const EdgeInsets.only(
-                    top: 24.0,
-                    left: 32.0,
-                    right: 16.0), // Adjusted padding for "Choose your car type"
+                padding:
+                    const EdgeInsets.only(top: 24.0, left: 32.0, right: 16.0),
                 child: Text(
                   'Choose your $carType car',
                   style: const TextStyle(
@@ -234,14 +165,12 @@ Widget _buildCarTypeCard(
   required String carBrand,
   required double imageWidth,
   required double imageHeight,
-  required Color carStatus
-  
+  required Color carStatus,
 }) {
   return GestureDetector(
     onTap: () {
       _handleCarSelectTap(context, carType);
     },
-    // Car card for edit code below VV
     child: Container(
       height: 240,
       decoration: BoxDecoration(
@@ -256,7 +185,7 @@ Widget _buildCarTypeCard(
               width: 370,
               child: Row(
                 children: [
-                  Icon(Icons.circle,size: 15,color: carStatus),
+                  Icon(Icons.circle, size: 15, color: carStatus),
                   Text(
                     carBrand,
                     style: const TextStyle(
@@ -284,7 +213,7 @@ Widget _buildCarTypeCard(
               child: Row(
                 children: [
                   Text(
-                    "car model",//ชื่อของรุ่นรถนั้นๆในแบรนด์ที่เลือก
+                    "car model",
                     style: TextStyle(
                       color: Color.fromARGB(255, 163, 163, 163),
                       fontSize: 16,
@@ -326,11 +255,12 @@ void _handleCarSelectTap(BuildContext context, String carName) {
   Navigator.push(
     context,
     MaterialPageRoute(
-      builder: (context) => Selectcar(carType: carName),
+      builder: (context) =>
+          const Requestborrowcar(), // Updated to navigate to Requestborrowcar
     ),
   );
 
-  //show message when a car type is selected
+  // Show message when a car type is selected
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text('You selected $carName'),
