@@ -66,6 +66,8 @@ flutter:
     - assets/images/Pick-Up.png
     - assets/images/black.jpg
     - assets/images/BMW.png
+    - assets/images/Toyota-Sedan.png
+    - assets/images/BWM_sedan.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
