@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hello/Cartypelist1.dart';
-import 'package:hello/History.dart';
-import 'package:hello/login.dart';
+import 'package:mobileappproject/login.dart';
 
-class Return extends StatelessWidget {
-  const Return({super.key});
+class Returnstatus extends StatelessWidget {
+  const Returnstatus({super.key});
 
   // Function for logout dialog
   void _showLogoutDialog(BuildContext context) {
@@ -61,7 +59,7 @@ class Return extends StatelessWidget {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
+              const Icon(
                 Icons.warning,
                 color: Colors.orange,
                 size: 60,
@@ -139,7 +137,7 @@ class Return extends StatelessWidget {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
+              const Icon(
                 Icons.check_circle_outline,
                 color: Colors.green,
                 size: 60,
@@ -227,6 +225,10 @@ class Return extends StatelessWidget {
               // );
               break;
             case 2:
+             Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Returnstatus()),
+              );
               break;
             case 3:
               // Navigator.push(
@@ -319,9 +321,9 @@ class Return extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: const [
+            children: [
               Text(
                 'For rent',
                 style: TextStyle(
@@ -357,8 +359,8 @@ class Return extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: const [
+              const Row(
+                children: [
                   Icon(
                     Icons.calendar_today,
                     color: Colors.grey,
