@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hello/Cartypelist1.dart';
-import 'package:hello/History.dart';
-import 'package:hello/login.dart';
+import 'package:mobileappproject/Borrower/Cartypelist1.dart';
+import 'package:mobileappproject/Borrower/History.dart';
+import 'package:mobileappproject/login.dart';
 
-class Return extends StatelessWidget {
-  const Return({super.key});
+class Returnstatus extends StatelessWidget {
+  const Returnstatus({super.key});
 
   // Function for logout dialog
   void _showLogoutDialog(BuildContext context) {
@@ -274,7 +274,8 @@ class Return extends StatelessWidget {
                   itemCount: 3, // Adjust this count to the number of cars
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 8.0),
                       child: _buildCarCard(context),
                     );
                   },
@@ -398,10 +399,11 @@ class Return extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 5),
-            ],),
-        ],),
                 ],
-            
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
