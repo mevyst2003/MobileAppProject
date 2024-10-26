@@ -106,14 +106,6 @@ class Adminrequestborrowcaredit extends StatelessWidget {
       body: Stack(
         // พื้นหลังภาพ
         children: [
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/your_image.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
           // แถบด้านบน (AppBar)
           Column(
             children: [
