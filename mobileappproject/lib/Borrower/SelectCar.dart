@@ -377,10 +377,4 @@ void _handleCarSelectTap(BuildContext context, String carName) {
       builder: (context) => const Requestborrowcar(),
     ),
   );
-
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text('You selected $carName'),
-    ),
-  );
 }

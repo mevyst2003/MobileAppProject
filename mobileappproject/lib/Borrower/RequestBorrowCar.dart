@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileappproject/Borrower/Cartypelist1.dart';
 import 'package:mobileappproject/Borrower/History.dart';
 import 'package:mobileappproject/login.dart';
 
@@ -551,50 +552,52 @@ class Requestborrowcar extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color(0xFF191919),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white,
-        currentIndex: 0,
-        onTap: (index) {
-          switch (index) {
-            case 0:
-              Navigator.pop(context);
-              break;
-            case 1:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const History()),
-              );
-              break;
-            case 2:
-              _showLogoutDialog(context);
-              break;
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.time_to_leave),
-            label: 'Car list',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.access_time),
-            label: 'Request & History',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.logout_rounded),
-            label: 'Log out',
-          ),
-        ],
-      ),
-    );
-  }
-
-  // Method to handle what happens when a car type card is tapped
-  void _handleCarSelectTap(BuildContext context, String carName) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('You selected $carName'),
+      bottomNavigationBar: Container(
+        height: 65, // Set the height of the Bottom Navigation Bar
+        child: BottomNavigationBar(
+          backgroundColor: const Color(0xFF191919),
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white,
+          currentIndex: 0,
+          onTap: (index) {
+            switch (index) {
+              case 0:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Cartypelist1()),
+                );
+                break;
+              case 1:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const History()),
+                );
+                break;
+              case 2:
+                _showLogoutDialog(context);
+                break;
+            }
+          },
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.time_to_leave, size: 25),
+              label: 'Car list',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.access_time),
+              label: 'Request & History',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.exit_to_app),
+              label: 'Log out',
+            ),
+          ],
+          selectedLabelStyle: const TextStyle(
+            fontSize: 14,
+          ), // Change font size for selected label
+          unselectedLabelStyle: const TextStyle(
+              fontSize: 13), // Change font size for unselected label
+        ),
       ),
     );
   }

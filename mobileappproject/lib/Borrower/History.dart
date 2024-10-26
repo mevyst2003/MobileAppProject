@@ -5,6 +5,184 @@ import 'package:mobileappproject/Borrower/Cartypelist1.dart';
 class History extends StatelessWidget {
   const History({super.key});
 
+  void _showHistoryDetailsDialog(
+    BuildContext context,
+    String carName,
+    String dateRange,
+    String approver,
+    String status,
+    IconData icon,
+    Color statusColor) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return Dialog(
+        backgroundColor: Colors.white, // Corrected to set the dialog background color to white
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30), // Rounded corners
+        ),
+        insetPadding: const EdgeInsets.all(16), // Adjust padding as needed
+        child: Padding(
+          padding: const EdgeInsets.only(left: 24.0, right: 16.0, top: 16.0, bottom: 16.0), // Left padding added here
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // History detail title
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "History detail",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontFamily: 'Montserrat',
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.close),
+                    color: Colors.black,
+                    onPressed: () {
+                      Navigator.of(context).pop(); // Close the dialog
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+
+              // Car information row
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(Icons.directions_car, size: 30),
+                  ),
+                  const SizedBox(width: 12),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        carName,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          fontFamily: 'Montserrat',
+                        ),
+                      ),
+                      const Text(
+                        'Type Sedan',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                          fontFamily: 'Montserrat',
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+
+              // Borrow date range row
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(Icons.calendar_today, size: 30),
+                  ),
+                  const SizedBox(width: 12),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Borrow $dateRange',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          fontFamily: 'Montserrat',
+                        ),
+                      ),
+                      const Text(
+                        'Return 20/10/2024',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                          fontFamily: 'Montserrat',
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+
+              // Approver row
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(Icons.person, size: 30),
+                  ),
+                  const SizedBox(width: 12),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Approver',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          fontFamily: 'Montserrat',
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            approver,
+                            style: const TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                              fontFamily: 'Montserrat',
+                            ),
+                          ),
+                          const SizedBox(width: 5),
+                          Container(
+                            width: 8,
+                            height: 8,
+                            decoration: BoxDecoration(
+                              color: statusColor, // Approver status color
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
+
   void _showLogoutDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -48,8 +226,7 @@ class History extends StatelessWidget {
                   ),
                 ),
                 // Reduced space between the text and buttons
-                SizedBox(
-                    height: 0), // Adjust space between text and buttons
+                SizedBox(height: 0), // Adjust space between text and buttons
               ],
             ),
           ),
@@ -194,8 +371,8 @@ class History extends StatelessWidget {
           selectedLabelStyle: const TextStyle(
             fontSize: 14,
           ), // Change font size for selected label
-          unselectedLabelStyle:
-              const TextStyle(fontSize: 13), // Change font size for unselected label
+          unselectedLabelStyle: const TextStyle(
+              fontSize: 13), // Change font size for unselected label
         ),
       ),
       body: ClipRRect(
@@ -320,6 +497,7 @@ class History extends StatelessWidget {
   }
 
   // Helper method to build car type cards
+  // Updated _buildCarTypeCard to include GestureDetector
   Widget _buildCarTypeCard(
     BuildContext context, {
     required String imagePath,
@@ -330,99 +508,113 @@ class History extends StatelessWidget {
     Color statusColor = Colors.green, // Status indicator color
     String dateRange = "10/19/2024 - 11/19/2024", // Example date range
   }) {
-    return Container(
-      height: 220,
-      decoration: BoxDecoration(
-        color: const Color(0xFFE8E8F2),
-        borderRadius: BorderRadius.circular(20), // Rounded corners
-      ),
-      child: Stack(
-        children: [
-          // Status text and circle in the top-right corner
-          Positioned(
-            top: 10,
-            right: 20,
-            child: Row(
-              children: [
-                Text(
-                  status,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    fontFamily: 'Montserrat',
+    return GestureDetector(
+      onTap: () {
+        // Trigger the dialog when the card is pressed
+        _showHistoryDetailsDialog(
+          context,
+          carName,
+          dateRange,
+          'John Smith', // Example approver
+          status,
+          Icons.person, // Example icon
+          statusColor,
+        );
+      },
+      child: Container(
+        height: 220,
+        decoration: BoxDecoration(
+          color: const Color(0xFFE8E8F2),
+          borderRadius: BorderRadius.circular(20), // Rounded corners
+        ),
+        child: Stack(
+          children: [
+            // Status text and circle in the top-right corner
+            Positioned(
+              top: 10,
+              right: 20,
+              child: Row(
+                children: [
+                  Text(
+                    status,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontFamily: 'Montserrat',
+                    ),
                   ),
-                ),
-                const SizedBox(width: 5), // Space between text and circle
-                Container(
-                  width: 12,
-                  height: 12,
-                  decoration: BoxDecoration(
-                    color: statusColor, // Status color
-                    shape: BoxShape.circle, // Circular shape
+                  const SizedBox(width: 5), // Space between text and circle
+                  Container(
+                    width: 12,
+                    height: 12,
+                    decoration: BoxDecoration(
+                      color: statusColor, // Status color
+                      shape: BoxShape.circle, // Circular shape
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          // Centered car image
-          Center(
-            child: Container(
-              width: imageWidth,
-              height: imageHeight,
-              margin:
-                  const EdgeInsets.only(bottom: 40, top: 10), // Add margin for spacing
-              child: Transform(
-                transform: Matrix4.identity()
-                  ..scale(-1.0, 1.0), // Flip image horizontally
-                alignment: Alignment.center,
-                child: Image.asset(
-                  imagePath,
-                  fit: BoxFit.contain,
+            // Centered car image
+            Center(
+              child: Container(
+                width: imageWidth,
+                height: imageHeight,
+                margin: const EdgeInsets.only(
+                    bottom: 40, top: 10), // Add margin for spacing
+                child: Transform(
+                  transform: Matrix4.identity()
+                    ..scale(-1.0, 1.0), // Flip image horizontally
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    imagePath,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
             ),
-          ),
-          // Text aligned to the left
-          Positioned(
-            left: 30, // Align text to the left
-            bottom: 20, // Place it closer to the bottom
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start, // Align left
-              children: [
-                Text(
-                  carName,
-                  style: const TextStyle(
-                    color: Color(0xFF191919),
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat',
+            // Text aligned to the left
+            Positioned(
+              left: 30, // Align text to the left
+              bottom: 20, // Place it closer to the bottom
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start, // Align left
+                children: [
+                  Text(
+                    carName,
+                    style: const TextStyle(
+                      color: Color(0xFF191919),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Montserrat',
+                    ),
                   ),
-                ),
-                const SizedBox(
-                    height: 2), // Increased spacing between car name and date
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.calendar_today,
-                      size: 15,
-                      color: Colors.grey,
-                    ),
-                    const SizedBox(width: 5),
-                    Text(
-                      dateRange,
-                      style: const TextStyle(
-                        fontSize: 12,
+                  const SizedBox(
+                      height: 2), // Increased spacing between car name and date
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.calendar_today,
+                        size: 15,
                         color: Colors.grey,
-                        fontFamily: 'Montserrat',
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                      const SizedBox(width: 5),
+                      Text(
+                        dateRange,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
+                          fontFamily: 'Montserrat',
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
