@@ -10,19 +10,54 @@ class Returnstatus extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text(
-            'Good Luck :)',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-              fontSize: 30,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+          backgroundColor: Colors.white,
+          contentPadding: const EdgeInsets.all(24),
+          content: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: const Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Center(
+                  child: Column(
+                    children: [
+                      Text(
+                        'Good luck :)',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontSize: 35,
+                          fontFamily: 'Montserrat',
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Text(
+                        'Are you sure you want to log out?',
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 12,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 0),
+              ],
             ),
           ),
-          content: const Text('Are you sure you want to log out?'),
+          actionsAlignment: MainAxisAlignment.center,
           actions: [
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 31, 31, 31),
+                backgroundColor: Colors.black,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(13.0),
+                ),
               ),
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
@@ -30,15 +65,34 @@ class Returnstatus extends StatelessWidget {
                   (Route<dynamic> route) => false,
                 );
               },
-              child: const Text('Log out'),
+              child: const Text(
+                'Log out',
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontSize: 16,
+                  color: Colors.white,
+                ),
+              ),
             ),
-            TextButton(
+            OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(color: Colors.black),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(13.0),
+                ),
+              ),
               onPressed: () {
-                Navigator.of(context).pop(); // Close dialog
+                Navigator.of(context).pop();
               },
               child: const Text(
                 'Cancel',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontSize: 16,
+                  color: Colors.black,
+                ),
               ),
             ),
           ],
@@ -207,28 +261,30 @@ class Returnstatus extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed, // Add this line
-        backgroundColor: const Color(0xFF191919),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white,
-        currentIndex: 0,
-        onTap: (index) {
-          switch (index) {
+     bottomNavigationBar: Container(
+        height: 65, // Set the height of the Bottom Navigation Bar
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: const Color(0xFF191919),
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white,
+          currentIndex: 0,
+          onTap: (index) {
+            switch (index) {
             case 0:
               Navigator.pop(context);
               break;
             case 1:
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const Returnstatus()),
-              // );
-              break;
-            case 2:
-             Navigator.push(
+              Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const Returnstatus()),
               );
+              break;
+            case 2:
+            //  Navigator.push(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => const Returnstatus()),
+            //   );
               break;
             case 3:
               // Navigator.push(
@@ -239,30 +295,36 @@ class Returnstatus extends StatelessWidget {
             case 4:
               _showLogoutDialog(context);
               break;
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(
+            }
+          },
+          items: const [
+            BottomNavigationBarItem(
             icon: Icon(Icons.time_to_leave),
             label: 'Car list',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.date_range_outlined),
-            label: 'Dashboard',
+            label: 'Return',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bar_chart_outlined),
-            label: 'Return',
+            label: 'Dashboard',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.access_time),
             label: 'History',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.logout_rounded),
+            icon: Icon(Icons.exit_to_app),
             label: 'Log out',
-          ),
-        ],
+            ),
+          ],
+          selectedLabelStyle: const TextStyle(
+            fontSize: 13.5,
+          ), // Change font size for selected label
+          unselectedLabelStyle: const TextStyle(
+              fontSize: 13), // Change font size for unselected label
+        ),
       ),
       body: ClipRRect(
         borderRadius: const BorderRadius.only(

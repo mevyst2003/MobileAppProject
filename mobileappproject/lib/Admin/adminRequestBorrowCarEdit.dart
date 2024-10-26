@@ -516,28 +516,30 @@ class Adminrequestborrowcaredit extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed, // Add this line
-        backgroundColor: const Color(0xFF191919),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white,
-        currentIndex: 0,
-        onTap: (index) {
-          switch (index) {
+      bottomNavigationBar: Container(
+        height: 65, // Set the height of the Bottom Navigation Bar
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: const Color(0xFF191919),
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white,
+          currentIndex: 0,
+          onTap: (index) {
+            switch (index) {
             case 0:
               Navigator.pop(context);
               break;
             case 1:
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const Returnstatus()),
-              // );
-              break;
-            case 2:
-             Navigator.push(
+              Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const Returnstatus()),
               );
+              break;
+            case 2:
+            //  Navigator.push(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => const Returnstatus()),
+            //   );
               break;
             case 3:
               // Navigator.push(
@@ -548,30 +550,36 @@ class Adminrequestborrowcaredit extends StatelessWidget {
             case 4:
               _showLogoutDialog(context);
               break;
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(
+            }
+          },
+          items: const [
+            BottomNavigationBarItem(
             icon: Icon(Icons.time_to_leave),
             label: 'Car list',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.date_range_outlined),
-            label: 'Dashboard',
+            label: 'Return',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bar_chart_outlined),
-            label: 'Return',
+            label: 'Dashboard',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.access_time),
             label: 'History',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.logout_rounded),
+            icon: Icon(Icons.exit_to_app),
             label: 'Log out',
-          ),
-        ],
+            ),
+          ],
+          selectedLabelStyle: const TextStyle(
+            fontSize: 13.5,
+          ), // Change font size for selected label
+          unselectedLabelStyle: const TextStyle(
+              fontSize: 13), // Change font size for unselected label
+        ),
       ),
     );
   }
