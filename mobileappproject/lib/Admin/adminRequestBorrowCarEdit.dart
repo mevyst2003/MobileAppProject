@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileappproject/Admin/adminHistory.dart';
 import 'package:mobileappproject/Admin/returnStatus.dart';
 import 'package:mobileappproject/login.dart';
 
@@ -277,30 +278,30 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                                     ),
                                   )
                                 : Row(
-                                  children: [
-                                    const Text(
-                                    "THB ",
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                    ),
+                                    children: [
+                                      const Text(
+                                        "THB ",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      Text(
+                                        _priceController.text,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      const Text(
+                                        " day",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                    Text(
-                                    _priceController.text,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                  const Text(
-                                    " day",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                  ],
-                                ),
                             // สถานะการใช้งาน
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -831,10 +832,10 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                 //   );
                 break;
               case 3:
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => const ()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Adminhistory()),
+                );
                 break;
               case 4:
                 _showLogoutDialog(context);
