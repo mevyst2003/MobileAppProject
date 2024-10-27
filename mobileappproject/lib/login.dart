@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobileappproject/Admin/adminAssetlist.dart';
 import 'package:mobileappproject/Borrower/Cartypelist1.dart';
+import 'package:mobileappproject/Lender/lenderAssetlist.dart';
 import 'package:mobileappproject/home.dart';
 import 'package:mobileappproject/register.dart';
 
@@ -183,6 +184,13 @@ class _Login2State extends State<Login> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => const Adminassetlist(),
+                          ),
+                        );
+                        } else if (login == "lender" && password == "lender") {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Lenderassetlist(), 
                           ),
                         );
                       } else {

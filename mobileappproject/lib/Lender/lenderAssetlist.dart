@@ -1,26 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:mobileappproject/Admin/adminHistory.dart';
+
+import 'package:mobileappproject/Lender/Approve.dart';
+import 'package:mobileappproject/Lender/lenderSelectCar.dart';
 import 'package:mobileappproject/login.dart';
+import 'package:mobileappproject/Lender/lenderHistory.dart';
 
-class Returnstatus extends StatelessWidget {
-  const Returnstatus({super.key});
+class Lenderassetlist extends StatefulWidget {
+  const Lenderassetlist({super.key});
 
-  // Function for logout dialog
+  @override
+  State<Lenderassetlist> createState() => _Lenderassetlist();
+}
+
+class _Lenderassetlist extends State<Lenderassetlist> {
   void _showLogoutDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0),
+            borderRadius: BorderRadius.circular(30.0), // Rounded corners
           ),
           backgroundColor: Colors.white,
-          contentPadding: const EdgeInsets.all(24),
-          content: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
+          contentPadding: const EdgeInsets.all(24), // Adjust padding as needed
+          content: Container(
+            width:
+                MediaQuery.of(context).size.width * 0.8, // 80% of screen width
             child: const Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize:
+                  MainAxisSize.min, // Ensure it only takes up necessary space
               children: [
+                // Title
                 Center(
                   child: Column(
                     children: [
@@ -45,19 +55,22 @@ class Returnstatus extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 0),
+                // Reduced space between the text and buttons
+                SizedBox(height: 0), // Adjust space between text and buttons
               ],
             ),
           ),
-          actionsAlignment: MainAxisAlignment.center,
+          actionsAlignment: MainAxisAlignment.center, // Center the buttons
           actions: [
+            // "Log out" button with custom style
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
+                backgroundColor:
+                    Colors.black, // Black background for Log out button
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(13.0),
+                  borderRadius: BorderRadius.circular(13.0), // Rounded corners
                 ),
               ),
               onPressed: () {
@@ -71,154 +84,33 @@ class Returnstatus extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   fontSize: 16,
-                  color: Colors.white,
+                  color: Colors.white, // White text color
                 ),
               ),
             ),
+            // "Cancel" button with border style
             OutlinedButton(
               style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: Colors.black),
+                side: const BorderSide(color: Colors.black), // Black border
                 padding:
                     const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(13.0),
+                  borderRadius: BorderRadius.circular(13.0), // Rounded corners
                 ),
               ),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(context).pop(); // Close the dialog
               },
               child: const Text(
                 'Cancel',
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   fontSize: 16,
-                  color: Colors.black,
+                  color: Colors.black, // Black text color
                 ),
               ),
             ),
           ],
-        );
-      },
-    );
-  }
-
-  // Function to show confirmation dialog (Approve/Reject)
-  void _showConfirmationDialog(BuildContext context, String actionType) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(
-                Icons.warning,
-                color: Colors.orange,
-                size: 60,
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                'Are you sure?',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'You want to $actionType the request?',
-                style: const TextStyle(fontSize: 16),
-              ),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop(); // Close current dialog
-                      _showCompletionDialog(context);
-                    },
-                    child: const Text(
-                      'Yes',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop(); // Close dialog and return
-                    },
-                    child: const Text(
-                      'Cancel',
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  // Function to show completion dialog
-  void _showCompletionDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(
-                Icons.check_circle_outline,
-                color: Colors.green,
-                size: 60,
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                'Complete!',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'The request was approved!',
-                style: TextStyle(fontSize: 16),
-              ),
-              const SizedBox(height: 16),
-              OutlinedButton(
-                onPressed: () {
-                  Navigator.of(context).pop(); // Close dialog
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          ),
         );
       },
     );
@@ -229,15 +121,19 @@ class Returnstatus extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF191919),
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(100),
+        preferredSize:
+            const Size.fromHeight(100), // Increase the height of AppBar
         child: AppBar(
-          elevation: 0.0,
+          elevation: 0.0, // Remove elevation to make it flush with the body
           backgroundColor: const Color(0xFF191919),
           flexibleSpace: const Padding(
-            padding: EdgeInsets.symmetric(vertical: 16.0),
+            padding: EdgeInsets.symmetric(
+                vertical: 16.0), // Adjust padding to center title properly
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text(
                     'Hertz Rental',
@@ -245,13 +141,13 @@ class Returnstatus extends StatelessWidget {
                       fontSize: 28,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'Montserrat',
                     ),
                   ),
-                  SizedBox(width: 4),
                   Text(
                     '.',
                     style: TextStyle(
-                      fontSize: 32,
+                      fontSize: 45,
                       color: Colors.red,
                       fontWeight: FontWeight.bold,
                     ),
@@ -273,17 +169,15 @@ class Returnstatus extends StatelessWidget {
           onTap: (index) {
             switch (index) {
               case 0:
-                Navigator.pop(context);
                 break;
               case 1:
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Returnstatus()),
+                  MaterialPageRoute(builder: (context) => const Approve()),
                 );
                 break;
               case 2:
                 showModalBottomSheet(
-                  //dashboard ก็อปตัวนี้ได้เลย
                   context: context,
                   backgroundColor: Colors.transparent,
                   builder: (BuildContext context) {
@@ -294,7 +188,7 @@ class Returnstatus extends StatelessWidget {
               case 3:
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Adminhistory()),
+                  MaterialPageRoute(builder: (context) => const Lenderhistory()),
                 );
                 break;
               case 4:
@@ -308,8 +202,8 @@ class Returnstatus extends StatelessWidget {
               label: 'Car list',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.date_range_outlined),
-              label: 'Return',
+              icon: Icon(Icons.description_outlined),
+              label: 'Request',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.bar_chart_outlined),
@@ -333,163 +227,132 @@ class Returnstatus extends StatelessWidget {
       ),
       body: ClipRRect(
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(25.0),
-          topRight: Radius.circular(25.0),
+          topLeft: Radius.circular(25.0), // Rounded top-left corner
+          topRight: Radius.circular(25.0), // Rounded top-right corner
         ),
-        child: SingleChildScrollView(
-          child: Container(
-            color: Colors.white,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text(
-                    'Return status',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+        child: Container(
+          color: Colors.white,
+          child: ListView(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(
+                    top: 24.0,
+                    left: 32.0,
+                    right: 16.0), // Adjusted padding for "Choose your car type"
+                child: Text(
+                  'Choose your car type',
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Color(0xFF191919),
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Montserrat',
                   ),
                 ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: 3, // Adjust this count to the number of cars
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 8.0),
-                      child: _buildCarCard(context),
-                    );
-                  },
+              ),
+              const SizedBox(height: 20),
+
+              // Car type selection for Sedan
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: _buildCarTypeCard(
+                  context,
+                  imagePath: 'assets/images/Sedan.png',
+                  carType: 'Sedan',
+                  imageWidth: 330,
+                  imageHeight: 120,
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(height: 16),
+
+              // Car type selection for SUV
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: _buildCarTypeCard(
+                  context,
+                  imagePath: 'assets/images/SUV.png',
+                  carType: 'SUV',
+                  imageWidth: 330,
+                  imageHeight: 120,
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // Car type selection for Pick-up
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: _buildCarTypeCard(
+                  context,
+                  imagePath: 'assets/images/Pick-Up.png',
+                  carType: 'Pick-Up',
+                  imageWidth: 330,
+                  imageHeight: 120,
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // Car type selection for EV
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: _buildCarTypeCard(
+                  context,
+                  imagePath: 'assets/images/EV.png',
+                  carType: 'EV',
+                  imageWidth: 330,
+                  imageHeight: 120,
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget _buildCarCard(BuildContext context) {
-    //dashboard ก็อปตัวนี้ได้เลย
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 3,
-            blurRadius: 7,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                'For rent',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
+// Helper method to build car type cards with navigation
+  Widget _buildCarTypeCard(
+    BuildContext context, {
+    required String imagePath,
+    required String carType,
+    required double imageWidth,
+    required double imageHeight,
+  }) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Lenderselectcar(carType: carType)),
+        );
+      },
+      child: Container(
+        height: 200,
+        decoration: BoxDecoration(
+          color: const Color(0xFFE8E8F2),
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: imageWidth,
+              height: imageHeight,
+              child: Image.asset(
+                imagePath,
+                fit: BoxFit.contain,
               ),
-              SizedBox(width: 8),
-              Icon(
-                Icons.circle,
-                color: Colors.orange,
-                size: 16,
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Image.asset(
-            'assets/images/Sedan.png',
-            width: double.infinity,
-            height: 150,
-            fit: BoxFit.fitWidth,
-          ),
-          const SizedBox(height: 10),
-          const Text(
-            'Sedan',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
             ),
-          ),
-          const SizedBox(height: 5),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Row(
-                children: [
-                  Icon(
-                    Icons.calendar_today,
-                    color: Colors.grey,
-                    size: 16,
-                  ),
-                  SizedBox(width: 5),
-                  Text(
-                    '10/19/2024- 11/19/2024',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
+            Text(
+              carType,
+              style: const TextStyle(
+                color: Color(0xFF191919),
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Montserrat',
               ),
-              Row(
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 74, 146, 205),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(9),
-                      ),
-                    ),
-                    onPressed: () {
-                      _showConfirmationDialog(context, 'Return');
-                    },
-                    child: const Text(
-                      'Return',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 5),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(9),
-                      ),
-                    ),
-                    onPressed: () {
-                      _showConfirmationDialog(context, 'late');
-                    },
-                    child: const Text(
-                      'Late',
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 5),
-                ],
-              ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

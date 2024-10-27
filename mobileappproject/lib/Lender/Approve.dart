@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mobileappproject/Admin/adminHistory.dart';
+import 'package:mobileappproject/Lender/lenderHistory.dart';
+import 'package:mobileappproject/Lender/lenderAssetlist.dart';
 import 'package:mobileappproject/login.dart';
 
-class Returnstatus extends StatelessWidget {
-  const Returnstatus({super.key});
+class Approve extends StatelessWidget {
+  const Approve({super.key});
 
   // Function for logout dialog
   void _showLogoutDialog(BuildContext context) {
@@ -16,7 +17,7 @@ class Returnstatus extends StatelessWidget {
           ),
           backgroundColor: Colors.white,
           contentPadding: const EdgeInsets.all(24),
-          content: SizedBox(
+          content: Container(
             width: MediaQuery.of(context).size.width * 0.8,
             child: const Column(
               mainAxisSize: MainAxisSize.min,
@@ -25,7 +26,7 @@ class Returnstatus extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        'Good luck :)',
+                        'Good Luck :)',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
@@ -114,7 +115,7 @@ class Returnstatus extends StatelessWidget {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(
+              Icon(
                 Icons.warning,
                 color: Colors.orange,
                 size: 60,
@@ -192,7 +193,7 @@ class Returnstatus extends StatelessWidget {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(
+              Icon(
                 Icons.check_circle_outline,
                 color: Colors.green,
                 size: 60,
@@ -238,6 +239,8 @@ class Returnstatus extends StatelessWidget {
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text(
                     'Hertz Rental',
@@ -245,13 +248,13 @@ class Returnstatus extends StatelessWidget {
                       fontSize: 28,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'Montserrat',
                     ),
                   ),
-                  SizedBox(width: 4),
                   Text(
                     '.',
                     style: TextStyle(
-                      fontSize: 32,
+                      fontSize: 45,
                       color: Colors.red,
                       fontWeight: FontWeight.bold,
                     ),
@@ -263,7 +266,7 @@ class Returnstatus extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Container(
-        height: 65, // Set the height of the Bottom Navigation Bar
+        height: 65,
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: const Color(0xFF191919),
@@ -273,17 +276,20 @@ class Returnstatus extends StatelessWidget {
           onTap: (index) {
             switch (index) {
               case 0:
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const Lenderassetlist()),
+                );
                 break;
               case 1:
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Returnstatus()),
+                  MaterialPageRoute(builder: (context) => const Approve()),
                 );
                 break;
               case 2:
                 showModalBottomSheet(
-                  //dashboard ก็อปตัวนี้ได้เลย
                   context: context,
                   backgroundColor: Colors.transparent,
                   builder: (BuildContext context) {
@@ -294,7 +300,7 @@ class Returnstatus extends StatelessWidget {
               case 3:
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Adminhistory()),
+                  MaterialPageRoute(builder: (context) => const Lenderhistory()),
                 );
                 break;
               case 4:
@@ -308,8 +314,8 @@ class Returnstatus extends StatelessWidget {
               label: 'Car list',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.date_range_outlined),
-              label: 'Return',
+              icon: Icon(IconData(0xefae, fontFamily: 'MaterialIcons')),
+              label: 'Request',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.bar_chart_outlined),
@@ -326,9 +332,10 @@ class Returnstatus extends StatelessWidget {
           ],
           selectedLabelStyle: const TextStyle(
             fontSize: 13.5,
-          ), // Change font size for selected label
+          ),
           unselectedLabelStyle: const TextStyle(
-              fontSize: 13), // Change font size for unselected label
+            fontSize: 13,
+          ),
         ),
       ),
       body: ClipRRect(
@@ -336,49 +343,46 @@ class Returnstatus extends StatelessWidget {
           topLeft: Radius.circular(25.0),
           topRight: Radius.circular(25.0),
         ),
-        child: SingleChildScrollView(
-          child: Container(
-            color: Colors.white,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text(
-                    'Return status',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+        child: Container(
+          color: Colors.white,
+          child: ListView(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  'Request status',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    fontFamily: 'Montserrat',
                   ),
                 ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: 3, // Adjust this count to the number of cars
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 8.0),
-                      child: _buildCarCard(context),
-                    );
-                  },
-                ),
-              ],
-            ),
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8.0),
+                    child: _buildRequestCard(context),
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget _buildCarCard(BuildContext context) {
-    //dashboard ก็อปตัวนี้ได้เลย
+  Widget _buildRequestCard(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFE8E8F2),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
@@ -392,11 +396,11 @@ class Returnstatus extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
+            children: const [
               Text(
-                'For rent',
+                'Pending',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.black,
@@ -406,7 +410,7 @@ class Returnstatus extends StatelessWidget {
               SizedBox(width: 8),
               Icon(
                 Icons.circle,
-                color: Colors.orange,
+                color: Colors.yellow,
                 size: 16,
               ),
             ],
@@ -415,8 +419,8 @@ class Returnstatus extends StatelessWidget {
           Image.asset(
             'assets/images/Sedan.png',
             width: double.infinity,
-            height: 150,
-            fit: BoxFit.fitWidth,
+            height: 200,
+            fit: BoxFit.contain,
           ),
           const SizedBox(height: 10),
           const Text(
@@ -424,14 +428,15 @@ class Returnstatus extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
+              fontFamily: 'Montserrat',
             ),
           ),
           const SizedBox(height: 5),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Row(
-                children: [
+              Row(
+                children: const [
                   Icon(
                     Icons.calendar_today,
                     color: Colors.grey,
@@ -439,7 +444,7 @@ class Returnstatus extends StatelessWidget {
                   ),
                   SizedBox(width: 5),
                   Text(
-                    '10/19/2024- 11/19/2024',
+                    '10/19/2024 - 11/19/2024',
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey,
@@ -451,40 +456,39 @@ class Returnstatus extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 74, 146, 205),
+                      backgroundColor: Colors.green,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(9),
                       ),
                     ),
                     onPressed: () {
-                      _showConfirmationDialog(context, 'Return');
+                      _showConfirmationDialog(context, 'approve');
                     },
                     child: const Text(
-                      'Return',
+                      'Approve',
                       style: TextStyle(
                         color: Colors.white,
                       ),
                     ),
                   ),
-                  const SizedBox(width: 5),
+                  const SizedBox(width: 8),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
+                      backgroundColor: Colors.red,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(9),
                       ),
                     ),
                     onPressed: () {
-                      _showConfirmationDialog(context, 'late');
+                      _showConfirmationDialog(context, 'reject');
                     },
                     child: const Text(
-                      'Late',
+                      'Reject',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                     ),
                   ),
-                  const SizedBox(width: 5),
                 ],
               ),
             ],
@@ -500,7 +504,7 @@ class DashboardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: 500, // Adjust height as needed
+        height: 500,
         width: 500,
         padding: const EdgeInsets.all(16),
         decoration: const BoxDecoration(
@@ -528,13 +532,11 @@ class DashboardWidget extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Row(
-              // หน้าป๊อปอัพที่ขึ้นมาของ dashboard
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   width: 150,
                   height: 150,
-                  //กล่องแรก
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -568,7 +570,6 @@ class DashboardWidget extends StatelessWidget {
                 Container(
                   width: 150,
                   height: 150,
-                  //กล่องสอง
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -609,7 +610,6 @@ class DashboardWidget extends StatelessWidget {
                 Container(
                   width: 150,
                   height: 150,
-                  //กล่องสาม
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -643,7 +643,6 @@ class DashboardWidget extends StatelessWidget {
                 Container(
                   width: 150,
                   height: 150,
-                  //กล่องสี่
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,

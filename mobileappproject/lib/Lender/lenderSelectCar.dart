@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:mobileappproject/Admin/adminHistory.dart';
+import 'package:flutter/widgets.dart';
+import 'package:mobileappproject/Lender/Approve.dart';
+import 'package:mobileappproject/Lender/lenderHistory.dart';
 import 'package:mobileappproject/login.dart';
+import 'package:mobileappproject/Lender/lenderRequestBorrowCar.dart';
 
-class Returnstatus extends StatelessWidget {
-  const Returnstatus({super.key});
+class Lenderselectcar extends StatelessWidget {
+  final String carType;
 
-  // Function for logout dialog
+  const Lenderselectcar({super.key, required this.carType});
+
   void _showLogoutDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -102,126 +106,54 @@ class Returnstatus extends StatelessWidget {
     );
   }
 
-  // Function to show confirmation dialog (Approve/Reject)
-  void _showConfirmationDialog(BuildContext context, String actionType) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(
-                Icons.warning,
-                color: Colors.orange,
-                size: 60,
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                'Are you sure?',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'You want to $actionType the request?',
-                style: const TextStyle(fontSize: 16),
-              ),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop(); // Close current dialog
-                      _showCompletionDialog(context);
-                    },
-                    child: const Text(
-                      'Yes',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop(); // Close dialog and return
-                    },
-                    child: const Text(
-                      'Cancel',
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  // Function to show completion dialog
-  void _showCompletionDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(
-                Icons.check_circle_outline,
-                color: Colors.green,
-                size: 60,
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                'Complete!',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                'The request was approved!',
-                style: TextStyle(fontSize: 16),
-              ),
-              const SizedBox(height: 16),
-              OutlinedButton(
-                onPressed: () {
-                  Navigator.of(context).pop(); // Close dialog
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          ),
-        );
-      },
-    );
+  List<Widget> buildCarList(BuildContext context, String carType) {
+    return [
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25.0),
+        child: _buildCarTypeCard(
+          context,
+          imagePath: 'assets/images/$carType.png',
+          carType: carType,
+          carBrand: 'Toyota',
+          carModel: 'Avalon Trim',
+          carPrice: 1500,
+          imageWidth: 340,
+          imageHeight: 120,
+          carStatus: Colors.green,
+        ),
+      ),
+      const SizedBox(height: 16),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25.0),
+        child: _buildCarTypeCard(
+          context,
+          imagePath: 'assets/images/$carType.png',
+          carType: carType,
+          carBrand: 'Toyota',
+          carModel: 'Avalon Trim',
+          carPrice: 1500,
+          imageWidth: 340,
+          imageHeight: 120,
+          carStatus: Colors.red,
+        ),
+      ),
+      const SizedBox(height: 16),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25.0),
+        child: _buildCarTypeCard(
+          context,
+          imagePath: 'assets/images/$carType.png',
+          carType: carType,
+          carBrand: 'Toyota',
+          carModel: 'Avalon Trim',
+          carPrice: 1500,
+          imageWidth: 340,
+          imageHeight: 120,
+          carStatus: Colors.green,
+        ),
+      ),
+      const SizedBox(height: 16),
+    ];
   }
 
   @override
@@ -238,6 +170,8 @@ class Returnstatus extends StatelessWidget {
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text(
                     'Hertz Rental',
@@ -245,13 +179,13 @@ class Returnstatus extends StatelessWidget {
                       fontSize: 28,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'Montserrat',
                     ),
                   ),
-                  SizedBox(width: 4),
                   Text(
                     '.',
                     style: TextStyle(
-                      fontSize: 32,
+                      fontSize: 45,
                       color: Colors.red,
                       fontWeight: FontWeight.bold,
                     ),
@@ -278,7 +212,7 @@ class Returnstatus extends StatelessWidget {
               case 1:
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Returnstatus()),
+                  MaterialPageRoute(builder: (context) => const Approve()),
                 );
                 break;
               case 2:
@@ -294,7 +228,8 @@ class Returnstatus extends StatelessWidget {
               case 3:
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Adminhistory()),
+                  MaterialPageRoute(
+                      builder: (context) => const Lenderhistory()),
                 );
                 break;
               case 4:
@@ -308,8 +243,8 @@ class Returnstatus extends StatelessWidget {
               label: 'Car list',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.date_range_outlined),
-              label: 'Return',
+              icon: Icon(Icons.description_outlined),
+              label: 'Request',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.bar_chart_outlined),
@@ -336,166 +271,155 @@ class Returnstatus extends StatelessWidget {
           topLeft: Radius.circular(25.0),
           topRight: Radius.circular(25.0),
         ),
-        child: SingleChildScrollView(
-          child: Container(
-            color: Colors.white,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text(
-                    'Return status',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+        child: Container(
+          color: Colors.white,
+          child: ListView(
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 24.0, left: 32.0, right: 16.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Choose your $carType car',
+                        style: const TextStyle(
+                          fontSize: 24,
+                          color: Color(0xFF191919),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Montserrat',
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: 3, // Adjust this count to the number of cars
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 8.0),
-                      child: _buildCarCard(context),
-                    );
-                  },
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(height: 20),
+              ...buildCarList(context, carType),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget _buildCarCard(BuildContext context) {
-    //dashboard ก็อปตัวนี้ได้เลย
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 3,
-            blurRadius: 7,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                'For rent',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
+  Widget _buildCarTypeCard(
+    BuildContext context, {
+    required String imagePath,
+    required String carType,
+    required String carModel,
+    required int carPrice,
+    required String carBrand,
+    required double imageWidth,
+    required double imageHeight,
+    required Color carStatus,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        _handleCarSelectTap(context, carType);
+      },
+      child: Container(
+        height: 210, // Adjust height as needed
+        decoration: BoxDecoration(
+          color: const Color(0xFFE8E8F2),
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 20),
+            Center(
+              child: SizedBox(
+                width: 350,
+                child: Row(
+                  children: [
+                    Icon(Icons.circle, size: 12, color: carStatus),
+                    const SizedBox(width: 5),
+                    Text(
+                      carBrand,
+                      style: const TextStyle(
+                        color: Color(0xFF191919),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                    const Spacer(),
+                    Text(
+                      "\THB $carPrice",
+                      style: const TextStyle(
+                        color: Color(0xFF191919),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(width: 8),
-              Icon(
-                Icons.circle,
-                color: Colors.orange,
-                size: 16,
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Image.asset(
-            'assets/images/Sedan.png',
-            width: double.infinity,
-            height: 150,
-            fit: BoxFit.fitWidth,
-          ),
-          const SizedBox(height: 10),
-          const Text(
-            'Sedan',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
             ),
-          ),
-          const SizedBox(height: 5),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Row(
-                children: [
-                  Icon(
-                    Icons.calendar_today,
-                    color: Colors.grey,
-                    size: 16,
-                  ),
-                  SizedBox(width: 5),
-                  Text(
-                    '10/19/2024- 11/19/2024',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 74, 146, 205),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(9),
-                      ),
-                    ),
-                    onPressed: () {
-                      _showConfirmationDialog(context, 'Return');
-                    },
-                    child: const Text(
-                      'Return',
+            Center(
+              child: SizedBox(
+                width: 350,
+                child: Row(
+                  children: [
+                    Text(
+                      carModel, // Display the car model here
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Color.fromARGB(255, 163, 163, 163),
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat',
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 5),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(9),
-                      ),
-                    ),
-                    onPressed: () {
-                      _showConfirmationDialog(context, 'late');
-                    },
-                    child: const Text(
-                      'Late',
+                    const Spacer(),
+                    Text(
+                      "day",
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Color.fromARGB(255, 163, 163, 163),
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat',
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 5),
-                ],
+                  ],
+                ),
               ),
-            ],
-          ),
-        ],
+            ),
+            Center(
+              child: SizedBox(
+                width: imageWidth,
+                height: imageHeight,
+                child: Image.asset(
+                  imagePath,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _handleCarSelectTap(BuildContext context, String carName) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const Lenderrequestborrowcar(),
+      ),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('You selected $carName'),
       ),
     );
   }
 }
 
 class DashboardWidget extends StatelessWidget {
+  //dashboard ก็อปตัวนี้ได้เลย
   @override
   Widget build(BuildContext context) {
     return Center(
