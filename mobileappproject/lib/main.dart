@@ -7,7 +7,7 @@ import 'package:mobileappproject/home.dart';
 
 void main() {
   runApp(const MaterialApp(
-    home: History(),
+    home: Home(),
     debugShowCheckedModeBanner: false, //ปิดแบนเนอร์ debug mode ด้านขวาบน,
   ));
 }

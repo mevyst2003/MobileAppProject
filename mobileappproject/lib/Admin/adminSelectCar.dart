@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobileappproject/Admin/adminRequestBorrowCarEdit.dart';
 import 'package:mobileappproject/Admin/returnStatus.dart';
-import 'package:mobileappproject/Borrower/Cartypelist1.dart';
-import 'package:mobileappproject/Borrower/History.dart';
-import 'package:mobileappproject/Borrower/RequestBorrowCar.dart';
 import 'package:mobileappproject/login.dart';
 
 class Adminselectcar extends StatelessWidget {
