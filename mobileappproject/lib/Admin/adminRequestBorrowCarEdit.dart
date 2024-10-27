@@ -221,9 +221,10 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                             // ข้อมูลรถ
                             Row(
                               children: [
-                                isEditingTopBox 
+                                isEditingTopBox
                                     ? Expanded(
-                                        child: TextField( // textfield หลังจากกด ปุ่มแก้ไข
+                                        child: TextField(
+                                          // textfield หลังจากกด ปุ่มแก้ไข
                                           controller: _nameController,
                                           style: const TextStyle(
                                             color: Colors.white,
@@ -253,7 +254,8 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                             ),
                             const SizedBox(height: 1),
                             isEditingTopBox
-                                ? Container( // textfield หลังจากกด ปุ่มแก้ไข
+                                ? Container(
+                                    // textfield หลังจากกด ปุ่มแก้ไข
                                     height: 30,
                                     width: 60, // Adjust width as needed
                                     padding: const EdgeInsets.symmetric(
@@ -311,7 +313,8 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     isEditingTopBox
-                                        ? DropdownButton<String>( // DropdownButton หลังจากกด ปุ่มแก้ไข
+                                        ? DropdownButton<String>(
+                                            // DropdownButton หลังจากกด ปุ่มแก้ไข
                                             value: _status,
                                             dropdownColor: Colors
                                                 .black, // Optional: set background for dropdown
@@ -355,8 +358,9 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                                           size: 24,
                                         ),
                                         const SizedBox(width: 5),
-                                        isEditingTopBox 
-                                            ? Container( // textfield หลังจากกด ปุ่มแก้ไข
+                                        isEditingTopBox
+                                            ? Container(
+                                                // textfield หลังจากกด ปุ่มแก้ไข
                                                 height: 40,
                                                 width: 70,
                                                 padding:
@@ -475,7 +479,8 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                                                   ),
                                                 ),
                                                 isEditingFeatures
-                                                    ? Container( // textfield หลังจากกด ปุ่มแก้ไข
+                                                    ? Container(
+                                                        // textfield หลังจากกด ปุ่มแก้ไข
                                                         height: 40,
                                                         width: 100,
                                                         padding:
@@ -550,7 +555,8 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                                                   ),
                                                 ),
                                                 isEditingFeatures
-                                                    ? Container( // textfield หลังจากกด ปุ่มแก้ไข
+                                                    ? Container(
+                                                        // textfield หลังจากกด ปุ่มแก้ไข
                                                         height: 40,
                                                         width: 140,
                                                         padding:
@@ -620,7 +626,7 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                                     const SizedBox(height: 10),
                                     // รายละเอียดคำอธิบาย
                                     isEditingDescription
-                                        ? Container( 
+                                        ? Container(
                                             padding: const EdgeInsets.all(8.0),
                                             decoration: BoxDecoration(
                                               color: Colors.white,
@@ -820,7 +826,8 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
               case 0:
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Adminassetlist()),
+                  MaterialPageRoute(
+                      builder: (context) => const Adminassetlist()),
                 );
                 break;
               case 1:
@@ -830,10 +837,13 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                 );
                 break;
               case 2:
-                //  Navigator.push(
-                //     context,
-                //     MaterialPageRoute(builder: (context) => const Returnstatus()),
-                //   );
+                showModalBottomSheet(
+                  context: context,
+                  backgroundColor: Colors.transparent,
+                  builder: (BuildContext context) {
+                    return DashboardWidget(); // Show the DashboardWidget as a bottom sheet
+                  },
+                );
                 break;
               case 3:
                 Navigator.push(
@@ -882,6 +892,193 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('You selected $carName'),
+      ),
+    );
+  }
+}
+
+class DashboardWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        height: 500, // Adjust height as needed
+        width: 500,
+        padding: const EdgeInsets.all(16),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Row(
+              children: [
+                Text(
+                  'Dashboard',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF191919),
+                  ),
+                ),
+                Icon(Icons.bar_chart_outlined)
+              ],
+            ),
+            const SizedBox(height: 16),
+            Row(
+              // หน้าป๊อปอัพที่ขึ้นมาของ dashboard
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 150,
+                  height: 150,
+                  //กล่องแรก
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.grey, width: 2),
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.check_circle,
+                        color: Colors.green,
+                        size: 24,
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Total Car available',
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                      Text(
+                        '> 11',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 20),
+                Container(
+                  width: 150,
+                  height: 150,
+                  //กล่องสอง
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.grey, width: 2),
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.cancel,
+                        color: Colors.red,
+                        size: 24,
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Total Car unavailable',
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                      Text(
+                        '> 7',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 150,
+                  height: 150,
+                  //กล่องสาม
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.grey, width: 2),
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.open_in_new,
+                        color: Colors.orange,
+                        size: 24,
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Total Rent',
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                      Text(
+                        '> 13',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 20),
+                Container(
+                  width: 150,
+                  height: 150,
+                  //กล่องสี่
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.grey, width: 2),
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.access_time,
+                        color: Colors.black,
+                        size: 24,
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Total Pending',
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                      Text(
+                        '> 6',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

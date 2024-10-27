@@ -167,51 +167,54 @@ class _AdminassetlistState extends State<Adminassetlist> {
           currentIndex: 0,
           onTap: (index) {
             switch (index) {
-            case 0:
-              break;
-            case 1:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Returnstatus()),
-              );
-              break;
-            case 2:
-            //  Navigator.push(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => const Returnstatus()),
-            //   );
-              break;
-            case 3:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Adminhistory()),
-              );
-              break;
-            case 4:
-              _showLogoutDialog(context);
-              break;
+              case 0:
+                break;
+              case 1:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Returnstatus()),
+                );
+                break;
+              case 2:
+                showModalBottomSheet(
+                  context: context,
+                  backgroundColor: Colors.transparent,
+                  builder: (BuildContext context) {
+                    return DashboardWidget(); // Show the DashboardWidget as a bottom sheet
+                  },
+                );
+                break;
+              case 3:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Adminhistory()),
+                );
+                break;
+              case 4:
+                _showLogoutDialog(context);
+                break;
             }
           },
           items: const [
             BottomNavigationBarItem(
-            icon: Icon(Icons.time_to_leave),
-            label: 'Car list',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.date_range_outlined),
-            label: 'Return',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart_outlined),
-            label: 'Dashboard',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.access_time),
-            label: 'History',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.exit_to_app),
-            label: 'Log out',
+              icon: Icon(Icons.time_to_leave),
+              label: 'Car list',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.date_range_outlined),
+              label: 'Return',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.bar_chart_outlined),
+              label: 'Dashboard',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.access_time),
+              label: 'History',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.exit_to_app),
+              label: 'Log out',
             ),
           ],
           selectedLabelStyle: const TextStyle(
@@ -347,6 +350,201 @@ class _AdminassetlistState extends State<Adminassetlist> {
                 fontFamily: 'Montserrat',
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DashboardWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        height: 500, // Adjust height as needed
+        width: 500,
+        padding: const EdgeInsets.all(16),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Row(
+              children: [
+                Text(
+                  'Dashboard',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF191919),
+                  ),
+                ),
+                Icon(Icons.bar_chart_outlined)
+              ],
+            ),
+            const SizedBox(height: 16),
+            Row(
+              // หน้าป๊อปอัพที่ขึ้นมาของ dashboard
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 150,
+                  height: 150,
+                  //กล่องแรก
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.grey, width: 2),
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.check_circle,
+                        color: Colors.green,
+                        size: 24,
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Total Car available',
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                      Text(
+                        '> 11',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 20),
+                Container(
+                  width: 150,
+                  height: 150,
+                  //กล่องสอง
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.grey, width: 2),
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.cancel,
+                        color: Colors.red,
+                        size: 24,
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Total Car unavailable',
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                      Text(
+                        '> 7',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 150,
+                  height: 150,
+                  //กล่องสาม
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.grey, width: 2),
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.open_in_new,
+                        color: Colors.orange,
+                        size: 24,
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Total Rent',
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                      Text(
+                        '> 13',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 20),
+                Container(
+                  width: 150,
+                  height: 150,
+                  //กล่องสี่
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.grey, width: 2),
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(
+                        Icons.access_time,
+                        color: Colors.black,
+                        size: 24,
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Total Pending',
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                      Text(
+                        '> 6',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
