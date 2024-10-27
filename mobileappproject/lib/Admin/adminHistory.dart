@@ -346,10 +346,7 @@ class Adminhistory extends StatelessWidget {
           onTap: (index) {
             switch (index) {
               case 0:
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Adminassetlist()),
-                );
+                Navigator.pop(context);
                 break;
               case 1:
                 Navigator.push(

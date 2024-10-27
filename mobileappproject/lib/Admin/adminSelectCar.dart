@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileappproject/Admin/adminHistory.dart';
 import 'package:mobileappproject/Admin/adminRequestBorrowCarEdit.dart';
 import 'package:mobileappproject/Admin/returnStatus.dart';
 import 'package:mobileappproject/login.dart';
@@ -204,52 +205,52 @@ class Adminselectcar extends StatelessWidget {
           currentIndex: 0,
           onTap: (index) {
             switch (index) {
-            case 0:
-              Navigator.pop(context);
-              break;
-            case 1:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Returnstatus()),
-              );
-              break;
-            case 2:
-            //  Navigator.push(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => const Returnstatus()),
-            //   );
-              break;
-            case 3:
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const ()),
-              // );
-              break;
-            case 4:
-              _showLogoutDialog(context);
-              break;
+              case 0:
+                Navigator.pop(context);
+                break;
+              case 1:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Returnstatus()),
+                );
+                break;
+              case 2:
+                //  Navigator.push(
+                //     context,
+                //     MaterialPageRoute(builder: (context) => const Returnstatus()),
+                //   );
+                break;
+              case 3:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Adminhistory()),
+                );
+                break;
+              case 4:
+                _showLogoutDialog(context);
+                break;
             }
           },
           items: const [
             BottomNavigationBarItem(
-            icon: Icon(Icons.time_to_leave),
-            label: 'Car list',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.date_range_outlined),
-            label: 'Return',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart_outlined),
-            label: 'Dashboard',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.access_time),
-            label: 'History',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.exit_to_app),
-            label: 'Log out',
+              icon: Icon(Icons.time_to_leave),
+              label: 'Car list',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.date_range_outlined),
+              label: 'Return',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.bar_chart_outlined),
+              label: 'Dashboard',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.access_time),
+              label: 'History',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.exit_to_app),
+              label: 'Log out',
             ),
           ],
           selectedLabelStyle: const TextStyle(
@@ -302,117 +303,116 @@ class Adminselectcar extends StatelessWidget {
   }
 
   Widget _buildCarTypeCard(
-  BuildContext context, {
-  required String imagePath,
-  required String carType,
-  required String carModel,
-  required int carPrice,
-  required String carBrand,
-  required double imageWidth,
-  required double imageHeight,
-  required Color carStatus,
-}) {
-  return GestureDetector(
-    onTap: () {
-      _handleCarSelectTap(context, carType);
-    },
-    child: Container(
-      height: 235, // Adjust height as needed
-      decoration: BoxDecoration(
-        color: const Color(0xFFE8E8F2),
-        borderRadius: BorderRadius.circular(30),
+    BuildContext context, {
+    required String imagePath,
+    required String carType,
+    required String carModel,
+    required int carPrice,
+    required String carBrand,
+    required double imageWidth,
+    required double imageHeight,
+    required Color carStatus,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        _handleCarSelectTap(context, carType);
+      },
+      child: Container(
+        height: 235, // Adjust height as needed
+        decoration: BoxDecoration(
+          color: const Color(0xFFE8E8F2),
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 20),
+            Center(
+              child: SizedBox(
+                width: 350,
+                child: Row(
+                  children: [
+                    Icon(Icons.circle, size: 12, color: carStatus),
+                    const SizedBox(width: 5),
+                    Text(
+                      carBrand,
+                      style: const TextStyle(
+                        color: Color(0xFF191919),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                    const Spacer(),
+                    Text(
+                      "THB $carPrice",
+                      style: const TextStyle(
+                        color: Color(0xFF191919),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Center(
+              child: SizedBox(
+                width: 350,
+                child: Row(
+                  children: [
+                    Text(
+                      carModel, // Display the car model here
+                      style: const TextStyle(
+                        color: Color.fromARGB(255, 163, 163, 163),
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                    const Spacer(),
+                    const Text(
+                      "day",
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 163, 163, 163),
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Center(
+              child: SizedBox(
+                width: imageWidth,
+                height: imageHeight,
+                child: Image.asset(
+                  imagePath,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    // Handle edit action
+                  },
+                  icon: const Icon(Icons.mode_edit_outlined),
+                  color: Color(0xFF191919),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 20),
-          Center(
-            child: SizedBox(
-              width: 350,
-              child: Row(
-                children: [
-                  Icon(Icons.circle, size: 12, color: carStatus),
-                  const SizedBox(width: 5),
-                  Text(
-                    carBrand,
-                    style: const TextStyle(
-                      color: Color(0xFF191919),
-                      fontSize: 18,
-                      fontWeight: FontWeight.w900,
-                      fontFamily: 'Montserrat',
-                    ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    "THB $carPrice",
-                    style: const TextStyle(
-                      color: Color(0xFF191919),
-                      fontSize: 18,
-                      fontWeight: FontWeight.w900,
-                      fontFamily: 'Montserrat',
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Center(
-            child: SizedBox(
-              width: 350,
-              child: Row(
-                children: [
-                  Text(
-                    carModel, // Display the car model here
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 163, 163, 163),
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Montserrat',
-                    ),
-                  ),
-                  const Spacer(),
-                  const Text(
-                    "day",
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 163, 163, 163),
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Montserrat',
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Center(
-            child: SizedBox(
-              width: imageWidth,
-              height: imageHeight,
-              child: Image.asset(
-                imagePath,
-                fit: BoxFit.contain,
-              ),
-            ),
-          ),
-          const Spacer(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              IconButton(
-                onPressed: () {
-                  // Handle edit action
-                },
-                icon: const Icon(Icons.mode_edit_outlined),
-                color: Color(0xFF191919),
-              ),
-            ],
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
+    );
+  }
 
   void _handleCarSelectTap(BuildContext context, String carName) {
     Navigator.push(

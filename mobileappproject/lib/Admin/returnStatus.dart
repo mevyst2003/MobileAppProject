@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileappproject/Admin/adminHistory.dart';
 import 'package:mobileappproject/login.dart';
 
 class Returnstatus extends StatelessWidget {
@@ -261,7 +262,7 @@ class Returnstatus extends StatelessWidget {
           ),
         ),
       ),
-     bottomNavigationBar: Container(
+      bottomNavigationBar: Container(
         height: 65, // Set the height of the Bottom Navigation Bar
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
@@ -271,52 +272,52 @@ class Returnstatus extends StatelessWidget {
           currentIndex: 0,
           onTap: (index) {
             switch (index) {
-            case 0:
-              Navigator.pop(context);
-              break;
-            case 1:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Returnstatus()),
-              );
-              break;
-            case 2:
-            //  Navigator.push(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => const Returnstatus()),
-            //   );
-              break;
-            case 3:
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const ()),
-              // );
-              break;
-            case 4:
-              _showLogoutDialog(context);
-              break;
+              case 0:
+                Navigator.pop(context);
+                break;
+              case 1:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Returnstatus()),
+                );
+                break;
+              case 2:
+                //  Navigator.push(
+                //     context,
+                //     MaterialPageRoute(builder: (context) => const Returnstatus()),
+                //   );
+                break;
+              case 3:
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Adminhistory()),
+                );
+                break;
+              case 4:
+                _showLogoutDialog(context);
+                break;
             }
           },
           items: const [
             BottomNavigationBarItem(
-            icon: Icon(Icons.time_to_leave),
-            label: 'Car list',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.date_range_outlined),
-            label: 'Return',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart_outlined),
-            label: 'Dashboard',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.access_time),
-            label: 'History',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.exit_to_app),
-            label: 'Log out',
+              icon: Icon(Icons.time_to_leave),
+              label: 'Car list',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.date_range_outlined),
+              label: 'Return',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.bar_chart_outlined),
+              label: 'Dashboard',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.access_time),
+              label: 'History',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.exit_to_app),
+              label: 'Log out',
             ),
           ],
           selectedLabelStyle: const TextStyle(
@@ -352,7 +353,8 @@ class Returnstatus extends StatelessWidget {
                   itemCount: 3, // Adjust this count to the number of cars
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 8.0),
                       child: _buildCarCard(context),
                     );
                   },
@@ -476,10 +478,11 @@ class Returnstatus extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 5),
-            ],),
-        ],),
                 ],
-            
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

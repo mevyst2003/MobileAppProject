@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileappproject/Admin/adminAssetlist.dart';
 import 'package:mobileappproject/Admin/adminHistory.dart';
 import 'package:mobileappproject/Admin/returnStatus.dart';
 import 'package:mobileappproject/login.dart';
@@ -220,9 +221,9 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                             // ข้อมูลรถ
                             Row(
                               children: [
-                                isEditingTopBox
+                                isEditingTopBox 
                                     ? Expanded(
-                                        child: TextField(
+                                        child: TextField( // textfield หลังจากกด ปุ่มแก้ไข
                                           controller: _nameController,
                                           style: const TextStyle(
                                             color: Colors.white,
@@ -252,7 +253,7 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                             ),
                             const SizedBox(height: 1),
                             isEditingTopBox
-                                ? Container(
+                                ? Container( // textfield หลังจากกด ปุ่มแก้ไข
                                     height: 30,
                                     width: 60, // Adjust width as needed
                                     padding: const EdgeInsets.symmetric(
@@ -310,7 +311,7 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     isEditingTopBox
-                                        ? DropdownButton<String>(
+                                        ? DropdownButton<String>( // DropdownButton หลังจากกด ปุ่มแก้ไข
                                             value: _status,
                                             dropdownColor: Colors
                                                 .black, // Optional: set background for dropdown
@@ -354,8 +355,8 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                                           size: 24,
                                         ),
                                         const SizedBox(width: 5),
-                                        isEditingTopBox
-                                            ? Container(
+                                        isEditingTopBox 
+                                            ? Container( // textfield หลังจากกด ปุ่มแก้ไข
                                                 height: 40,
                                                 width: 70,
                                                 padding:
@@ -474,7 +475,7 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                                                   ),
                                                 ),
                                                 isEditingFeatures
-                                                    ? Container(
+                                                    ? Container( // textfield หลังจากกด ปุ่มแก้ไข
                                                         height: 40,
                                                         width: 100,
                                                         padding:
@@ -549,7 +550,7 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                                                   ),
                                                 ),
                                                 isEditingFeatures
-                                                    ? Container(
+                                                    ? Container( // textfield หลังจากกด ปุ่มแก้ไข
                                                         height: 40,
                                                         width: 140,
                                                         padding:
@@ -619,7 +620,7 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                                     const SizedBox(height: 10),
                                     // รายละเอียดคำอธิบาย
                                     isEditingDescription
-                                        ? Container(
+                                        ? Container( 
                                             padding: const EdgeInsets.all(8.0),
                                             decoration: BoxDecoration(
                                               color: Colors.white,
@@ -817,7 +818,10 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
           onTap: (index) {
             switch (index) {
               case 0:
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Adminassetlist()),
+                );
                 break;
               case 1:
                 Navigator.push(
