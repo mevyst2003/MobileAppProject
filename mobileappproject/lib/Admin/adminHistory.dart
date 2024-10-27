@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobileappproject/Admin/adminAssetlist.dart';
 import 'package:mobileappproject/Admin/returnStatus.dart';
 import 'package:mobileappproject/Borrower/Cartypelist1.dart';
 import 'package:mobileappproject/Borrower/History.dart';
@@ -345,7 +346,10 @@ class Adminhistory extends StatelessWidget {
           onTap: (index) {
             switch (index) {
               case 0:
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Adminassetlist()),
+                );
                 break;
               case 1:
                 Navigator.push(
