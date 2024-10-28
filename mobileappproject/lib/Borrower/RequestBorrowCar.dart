@@ -516,7 +516,10 @@ class Requestborrowcar extends StatelessWidget {
                                                 ),
                                                 // ปุ่มเช่ารถ
                                                 ElevatedButton(
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                    _showConfirmationDialog(
+                                                        context);
+                                                  },
                                                   style:
                                                       ElevatedButton.styleFrom(
                                                     backgroundColor:
@@ -599,6 +602,177 @@ class Requestborrowcar extends StatelessWidget {
               fontSize: 13), // Change font size for unselected label
         ),
       ),
+    );
+  }
+
+  void _showCompleteDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
+          contentPadding: const EdgeInsets.all(20),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.check_circle_outline_rounded,
+                size: 150,
+                color: Color.fromARGB(255, 113, 218, 116),
+              ),
+              const SizedBox(height: 5),
+              const Text(
+                'Complete!',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Montserrat',
+                ),
+              ),
+              const SizedBox(height: 5),
+              const Text(
+                'You have rented a car',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.black,
+                  fontFamily: 'Montserrat',
+                ),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.center, // จัดให้อยู่ตรงกลาง
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const History()),
+                      );
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: BorderSide(color: Colors.black), // Black border
+                      ),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10), // ปรับขนาดภายในปุ่ม
+                    ),
+                    child: const Text(
+                      "OK",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _showConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
+          contentPadding: const EdgeInsets.all(20),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.error_outline_outlined,
+                size: 150,
+                color: Color.fromARGB(255, 252, 185, 84),
+              ),
+              const SizedBox(height: 5),
+              const Text(
+                'Are you sure?',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Montserrat',
+                ),
+              ),
+              const SizedBox(height: 5),
+              const Text(
+                'You want to rent the car?',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.black,
+                  fontFamily: 'Montserrat',
+                ),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.center, // จัดให้อยู่ตรงกลาง
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Close the current dialog
+                      Navigator.of(context).pop();
+                      // Show Complete Dialog after Yes is pressed
+                      _showCompleteDialog(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 35, vertical: 10), // ปรับขนาดภายในปุ่ม
+                    ),
+                    child: const Text(
+                      "Yes",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 8), // เพิ่มระยะห่างระหว่างปุ่ม
+                  TextButton(
+                    onPressed: () {
+                      // Close the current dialog
+                      Navigator.of(context).pop();
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: BorderSide(color: Colors.black), // Black border
+                      ),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10), // ปรับขนาดภายในปุ่ม
+                    ),
+                    child: const Text(
+                      "Cancel",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
