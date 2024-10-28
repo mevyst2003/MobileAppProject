@@ -294,6 +294,7 @@ class History extends StatelessWidget {
         preferredSize:
             const Size.fromHeight(100), // Increase the height of AppBar
         child: AppBar(
+          automaticallyImplyLeading: false,
           elevation: 0.0, // Remove elevation to make it flush with the body
           backgroundColor: const Color(0xFF191919),
           flexibleSpace: const Padding(

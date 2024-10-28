@@ -124,6 +124,7 @@ class _Lenderassetlist extends State<Lenderassetlist> {
         preferredSize:
             const Size.fromHeight(100), // Increase the height of AppBar
         child: AppBar(
+          automaticallyImplyLeading: false,
           elevation: 0.0, // Remove elevation to make it flush with the body
           backgroundColor: const Color(0xFF191919),
           flexibleSpace: const Padding(
@@ -361,185 +362,128 @@ class _Lenderassetlist extends State<Lenderassetlist> {
 class DashboardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Align(
+      alignment: Alignment.bottomCenter,
       child: Container(
-        height: 500, // Adjust height as needed
+        height: 410,
         width: 500,
         padding: const EdgeInsets.all(16),
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
+            topLeft: Radius.circular(35),
+            topRight: Radius.circular(35),
           ),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Row(
-              children: [
-                Text(
-                  'Dashboard',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF191919),
-                  ),
-                ),
-                Icon(Icons.bar_chart_outlined)
-              ],
-            ),
-            const SizedBox(height: 16),
-            Row(
-              // หน้าป๊อปอัพที่ขึ้นมาของ dashboard
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 150,
-                  height: 150,
-                  //กล่องแรก
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.grey, width: 2),
-                  ),
-                  child: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.check_circle,
-                        color: Colors.green,
-                        size: 24,
-                      ),
-                      SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: const [
                       Text(
-                        'Total Car available',
+                        'Dashboard',
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF191919),
+                          fontFamily: 'Montserrat',
                         ),
                       ),
-                      Text(
-                        '> 11',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                      SizedBox(width: 8),
+                      Icon(
+                        Icons.bar_chart_outlined,
+                        size: 27,
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(width: 20),
-                Container(
-                  width: 150,
-                  height: 150,
-                  //กล่องสอง
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.grey, width: 2),
+                  IconButton(
+                    icon: const Icon(Icons.close, color: Colors.black),
+                    onPressed: () {
+                      Navigator.of(context).pop(); // ปิดแท็บเมื่อคลิกกากบาท
+                    },
                   ),
-                  child: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.cancel,
-                        color: Colors.red,
-                        size: 24,
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'Total Car unavailable',
-                        style: TextStyle(
-                          fontSize: 14,
-                        ),
-                      ),
-                      Text(
-                        '> 7',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  width: 150,
-                  height: 150,
-                  //กล่องสาม
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.grey, width: 2),
-                  ),
-                  child: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.open_in_new,
-                        color: Colors.orange,
-                        size: 24,
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'Total Rent',
-                        style: TextStyle(
-                          fontSize: 14,
-                        ),
-                      ),
-                      Text(
-                        '> 13',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
+                buildDashboardCard(
+                  icon: Icons.check_circle,
+                  color: Colors.green,
+                  title: 'Total Car available',
+                  value: '> 11',
                 ),
-                const SizedBox(width: 20),
-                Container(
-                  width: 150,
-                  height: 150,
-                  //กล่องสี่
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.grey, width: 2),
-                  ),
-                  child: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.access_time,
-                        color: Colors.black,
-                        size: 24,
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'Total Pending',
-                        style: TextStyle(
-                          fontSize: 14,
-                        ),
-                      ),
-                      Text(
-                        '> 6',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
+                const SizedBox(width: 10),
+                buildDashboardCard(
+                  icon: Icons.cancel,
+                  color: Colors.red,
+                  title: 'Total Car unavailable',
+                  value: '> 7',
                 ),
               ],
-            )
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                buildDashboardCard(
+                  icon: Icons.open_in_new,
+                  color: Colors.orange,
+                  title: 'Total Rent',
+                  value: '> 13',
+                ),
+                const SizedBox(width: 10),
+                buildDashboardCard(
+                  icon: Icons.access_time,
+                  color: Colors.black,
+                  title: 'Total Pending',
+                  value: '> 6',
+                ),
+              ],
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buildDashboardCard(
+      {required IconData icon,
+      required Color color,
+      required String title,
+      required String value}) {
+    return Container(
+      width: 190,
+      height: 152,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(color: Colors.grey, width: 1),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, color: color, size: 60),
+          const SizedBox(height: 5),
+          Text(title,
+              style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Montserrat')),
+          Text(value,
+              style: const TextStyle(
+                  fontSize: 23,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Montserrat')),
+        ],
       ),
     );
   }
