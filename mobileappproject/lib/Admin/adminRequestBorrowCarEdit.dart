@@ -160,6 +160,14 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
       body: Stack(
         // พื้นหลังภาพ
         children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/BMW.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
           // แถบด้านบน (AppBar)
           Column(
             children: [
@@ -176,14 +184,15 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                           'Hertz Rental',
                           style: TextStyle(
                             fontSize: 28,
+                            color: Colors.black,
                             fontWeight: FontWeight.bold,
+                            fontFamily: 'Montserrat',
                           ),
                         ),
-                        SizedBox(width: 4),
                         Text(
                           '.',
                           style: TextStyle(
-                            fontSize: 32,
+                            fontSize: 45,
                             color: Colors.red,
                             fontWeight: FontWeight.bold,
                           ),
@@ -196,616 +205,438 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
               // ส่วนเนื้อหาหลัก
               Expanded(
                 child: Container(
-                  // ภาพพื้นหลังของส่วนเนื้อหา
+                  // ภาพพื้นหลังของส่วนเนื้อหา ที่ขยายตามเนื้อหา
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("assets/images/black.jpg"),
                       fit: BoxFit.cover,
                     ),
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                  child: ListView(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 120.0),
-                        height: 1100,
-                        decoration: const BoxDecoration(
-                          color: Color(0xFF191919),
-                          borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(50)),
-                        ),
-                        padding: const EdgeInsets.only(left: 16.0, top: 25.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // ข้อมูลรถ
-                            Row(
-                              children: [
-                                isEditingTopBox
-                                    ? Expanded(
-                                        child: TextField(
-                                          // textfield หลังจากกด ปุ่มแก้ไข
-                                          controller: _nameController,
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                          decoration: const InputDecoration(
-                                            border: UnderlineInputBorder(),
-                                          ),
-                                        ),
-                                      )
-                                    : Text(
-                                        _nameController.text,
-                                        style: const TextStyle(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white),
-                                      ),
-                                IconButton(
-                                  onPressed: () => toggleEditMode("topbox"),
-                                  icon: const Icon(
-                                    Icons.mode_edit_outlined,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
+                  child: SingleChildScrollView(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(top: 120.0),
+                            // เนื้อหาหลักยาวตาม content
+                            decoration: BoxDecoration(
+                              color: Color(0xFF191919),
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(50)),
                             ),
-                            const SizedBox(height: 1),
-                            isEditingTopBox
-                                ? Container(
-                                    // textfield หลังจากกด ปุ่มแก้ไข
-                                    height: 30,
-                                    width: 60, // Adjust width as needed
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0),
-                                    decoration: const BoxDecoration(
-                                      color: Colors.transparent,
-                                      border: Border(
-                                        bottom: BorderSide(
-                                            color: Colors.white, width: 1.0),
-                                      ),
-                                    ),
-                                    child: TextField(
-                                      controller: _priceController,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      decoration: const InputDecoration(
-                                        border: InputBorder
-                                            .none, // Remove default underline
-                                      ),
-                                    ),
-                                  )
-                                : Row(
-                                    children: [
-                                      const Text(
-                                        "THB ",
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      Text(
-                                        _priceController.text,
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      const Text(
-                                        " day",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                            // สถานะการใช้งาน
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                            padding:
+                                const EdgeInsets.only(left: 30.0, top: 25.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                // ข้อมูลรถ
+                                Row(
                                   children: [
-                                    isEditingTopBox
-                                        ? DropdownButton<String>(
-                                            // DropdownButton หลังจากกด ปุ่มแก้ไข
-                                            value: _status,
-                                            dropdownColor: Colors
-                                                .black, // Optional: set background for dropdown
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                            ),
-                                            icon: const Icon(
-                                              Icons.arrow_drop_down,
-                                              color: Colors.white,
-                                            ),
-                                            items: <String>[
-                                              'Available',
-                                              'Disable'
-                                            ].map<DropdownMenuItem<String>>(
-                                                (String value) {
-                                              return DropdownMenuItem<String>(
-                                                value: value,
-                                                child: Text(value),
-                                              );
-                                            }).toList(),
-                                            onChanged: (String? newValue) {
-                                              setState(() {
-                                                _status = newValue!;
-                                              });
-                                            },
-                                          )
-                                        : Text(
-                                            _status,
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                    const SizedBox(height: 1),
-                                    Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.people,
-                                          color: Colors.white,
-                                          size: 24,
-                                        ),
-                                        const SizedBox(width: 5),
-                                        isEditingTopBox
-                                            ? Container(
-                                                // textfield หลังจากกด ปุ่มแก้ไข
-                                                height: 40,
-                                                width: 70,
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                decoration: const BoxDecoration(
-                                                  color: Colors.transparent,
-                                                  border: Border(
-                                                    bottom: BorderSide(
-                                                        color: Colors.white,
-                                                        width: 1.0),
-                                                  ),
-                                                ),
-                                                child: TextField(
-                                                  controller: _seatController,
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    border: InputBorder
-                                                        .none, // Remove default underline
-                                                  ),
-                                                ),
-                                              )
-                                            : Text(
-                                                _seatController.text,
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16,
-                                                ),
-                                              ),
-                                      ],
+                                    Text(
+                                      'BMW 750e xDrive',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                        fontFamily: 'Montserrat',
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        // Handle edit action
+                                      },
+                                      icon:
+                                          const Icon(Icons.mode_edit_outlined),
+                                      color: Color.fromARGB(255, 255, 255, 255),
                                     ),
                                   ],
                                 ),
-                                const SizedBox(width: 20),
-                                // รูปรถ
-                                Container(
-                                  width: 300,
-                                  height: 140,
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                      image:
-                                          AssetImage('assets/images/BMW.png'),
-                                      fit: BoxFit.cover,
-                                    ),
+                                SizedBox(height: 1),
+                                Text(
+                                  'THB 3500/Day',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontFamily: 'Montserrat',
                                   ),
                                 ),
-                              ],
-                            ),
-                            // รายละเอียดฟีเจอร์
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: 850,
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(50),
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(25.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                // สถานะการใช้งาน
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    // ชื่อฟีเจอร์
-                                    Row(
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        const Text(
-                                          'Features',
+                                        Text(
+                                          'Available',
                                           style: TextStyle(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black,
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontFamily: 'Montserrat',
                                           ),
                                         ),
-                                        IconButton(
-                                            onPressed: () =>
-                                                toggleEditMode("features"),
-                                            icon: const Icon(
-                                                Icons.mode_edit_outlined)),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 20),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          child: Container(
-                                            padding: const EdgeInsets.all(16),
-                                            decoration: BoxDecoration(
+                                        SizedBox(height: 1),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.people,
                                               color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              border: Border.all(
-                                                  color: Colors.grey, width: 2),
+                                              size: 18,
                                             ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                const Icon(
-                                                  Icons.ac_unit_outlined,
-                                                  color: Colors.black,
-                                                  size: 24,
-                                                ),
-                                                const SizedBox(height: 10),
-                                                const Text(
-                                                  'Climate Control',
-                                                  style: TextStyle(
-                                                    fontSize: 20,
-                                                  ),
-                                                ),
-                                                isEditingFeatures
-                                                    ? Container(
-                                                        // textfield หลังจากกด ปุ่มแก้ไข
-                                                        height: 40,
-                                                        width: 100,
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal:
-                                                                    8.0),
-                                                        decoration:
-                                                            const BoxDecoration(
-                                                          color: Colors
-                                                              .transparent,
-                                                          border: Border(
-                                                            bottom: BorderSide(
-                                                                color:
-                                                                    Colors.grey,
-                                                                width: 1.0),
-                                                          ),
-                                                        ),
-                                                        child: TextField(
-                                                          controller:
-                                                              _featuresController,
-                                                          style:
-                                                              const TextStyle(
-                                                            color: Colors.grey,
-                                                            fontSize: 16,
-                                                          ),
-                                                          decoration:
-                                                              const InputDecoration(
-                                                            border: InputBorder
-                                                                .none, // Remove default underline
-                                                          ),
-                                                        ),
-                                                      )
-                                                    : Text(
-                                                        _featuresController
-                                                            .text,
-                                                        style: const TextStyle(
-                                                          fontSize: 16,
-                                                          color: Colors.grey,
-                                                        ),
-                                                      ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(width: 20),
-                                        Expanded(
-                                          child: Container(
-                                            padding: const EdgeInsets.all(16),
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              border: Border.all(
-                                                  color: Colors.grey, width: 2),
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                const Icon(
-                                                  Icons.speed,
-                                                  color: Colors.black,
-                                                  size: 24,
-                                                ),
-                                                const SizedBox(height: 10),
-                                                const Text(
-                                                  'Acceleration',
-                                                  style: TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                isEditingFeatures
-                                                    ? Container(
-                                                        // textfield หลังจากกด ปุ่มแก้ไข
-                                                        height: 40,
-                                                        width: 140,
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal:
-                                                                    8.0),
-                                                        decoration:
-                                                            const BoxDecoration(
-                                                          color: Colors
-                                                              .transparent,
-                                                          border: Border(
-                                                            bottom: BorderSide(
-                                                                color:
-                                                                    Colors.grey,
-                                                                width: 1.0),
-                                                          ),
-                                                        ),
-                                                        child: TextField(
-                                                          controller:
-                                                              _features2Controller,
-                                                          style:
-                                                              const TextStyle(
-                                                            color: Colors.grey,
-                                                            fontSize: 16,
-                                                          ),
-                                                          decoration:
-                                                              const InputDecoration(
-                                                            border: InputBorder
-                                                                .none, // Remove default underline
-                                                          ),
-                                                        ),
-                                                      )
-                                                    : Text(
-                                                        _features2Controller
-                                                            .text,
-                                                        style: const TextStyle(
-                                                          fontSize: 16,
-                                                          color: Colors.grey,
-                                                        ),
-                                                      ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 30),
-                                    // คำอธิบายรถ
-                                    Row(
-                                      children: [
-                                        const Text(
-                                          'Car Description',
-                                          style: TextStyle(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                        IconButton(
-                                            onPressed: () =>
-                                                toggleEditMode("description"),
-                                            icon: const Icon(
-                                                Icons.mode_edit_outlined)),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 10),
-                                    // รายละเอียดคำอธิบาย
-                                    isEditingDescription
-                                        ? Container(
-                                            padding: const EdgeInsets.all(8.0),
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              border: Border.all(
-                                                  color: Colors.grey,
-                                                  width: 1.0),
-                                            ),
-                                            child: TextField(
-                                              controller:
-                                                  _descriptionController,
-                                              maxLines:
-                                                  6, // Adjust based on how large you want the box
-                                              style: const TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 16,
-                                              ),
-                                              decoration: const InputDecoration(
-                                                border: InputBorder
-                                                    .none, // Remove underline
-                                                hintText:
-                                                    "Enter car description here",
+                                            SizedBox(width: 5),
+                                            Text(
+                                              '5 seats',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14,
+                                                fontFamily: 'Montserrat',
                                               ),
                                             ),
-                                          )
-                                        : Text(
-                                            _descriptionController.text,
-                                            style: const TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-
-                                    const SizedBox(height: 10),
-                                    const Text(
-                                      'Date Borrow - Return',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Spacer(), // Adds space between text and image
+                                    // รูปรถ
+                                    Container(
+                                      width: 320,
+                                      height: 140,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                              'assets/images/BMW.png'),
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
-                                    const SizedBox(height: 10),
-                                    Column(
+                                  ],
+                                ),
+                                // รายละเอียดฟีเจอร์
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(40),
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(30.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        // ปุ่มให้เลือกวันที่
-                                        OutlinedButton(
-                                          onPressed: () {},
-                                          style: OutlinedButton.styleFrom(
-                                            backgroundColor: Colors.white,
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 30, vertical: 15),
-                                            side: const BorderSide(
-                                                color: Colors.grey),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            minimumSize:
-                                                const Size(double.infinity, 50),
-                                          ),
-                                          child: const Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                'Date Borrow',
-                                                style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 16,
-                                                ),
+                                        // ชื่อฟีเจอร์
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'Features',
+                                              style: TextStyle(
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                                fontFamily: 'Montserrat',
                                               ),
-                                              Icon(Icons.calendar_today,
-                                                  color: Colors.grey),
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(height: 10),
-                                        OutlinedButton(
-                                          onPressed: () {},
-                                          style: OutlinedButton.styleFrom(
-                                            backgroundColor: Colors.white,
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 30, vertical: 15),
-                                            side: const BorderSide(
-                                                color: Colors.grey),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
                                             ),
-                                            minimumSize:
-                                                const Size(double.infinity, 50),
-                                          ),
-                                          child: const Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                'Date Return',
-                                                style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 16,
-                                                ),
-                                              ),
-                                              Icon(Icons.calendar_today,
-                                                  color: Colors.grey),
-                                            ],
-                                          ),
+                                            IconButton(
+                                              onPressed: () {
+                                                // Handle edit action
+                                              },
+                                              icon: const Icon(
+                                                  Icons.mode_edit_outlined),
+                                              color: Color(0xFF191919),
+                                            ),
+                                          ],
                                         ),
-                                        const SizedBox(height: 10),
-                                        const Divider(
-                                          thickness: 1,
-                                          color: Colors.grey,
-                                        ),
-                                        const SizedBox(height: 10),
+
+                                        SizedBox(height: 10),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            RichText(
-                                              text: TextSpan(
-                                                children: [
-                                                  const TextSpan(
-                                                    text: 'THB ',
-                                                    style: TextStyle(
-                                                      fontSize: 24,
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                            Expanded(
+                                              child: Container(
+                                                padding: EdgeInsets.all(16),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  border: Border.all(
+                                                      color: Colors.grey,
+                                                      width: 1),
+                                                ),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.ac_unit_outlined,
                                                       color: Colors.black,
+                                                      size: 24,
                                                     ),
-                                                  ),
-                                                  TextSpan(
-                                                    text: _priceController.text,
-                                                    style: const TextStyle(
-                                                      fontSize: 24,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.black,
+                                                    SizedBox(height: 10),
+                                                    Text(
+                                                      'Climate Control',
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                      ),
                                                     ),
-                                                  ),
-                                                  const TextSpan(
-                                                    text: ' /day',
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Colors.black,
+                                                    Text(
+                                                      'Two-zone',
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: Colors.grey,
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                            // ปุ่มเช่ารถ
-                                            ElevatedButton(
-                                              onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.black,
-                                              ),
-                                              child: const Text(
-                                                'Save',
-                                                style: TextStyle(
-                                                  fontSize: 16,
+                                            SizedBox(width: 10),
+                                            Expanded(
+                                              child: Container(
+                                                padding: EdgeInsets.all(16),
+                                                decoration: BoxDecoration(
                                                   color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  border: Border.all(
+                                                      color: Colors.grey,
+                                                      width: 1),
+                                                ),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.speed,
+                                                      color: Colors.black,
+                                                      size: 24,
+                                                    ),
+                                                    SizedBox(height: 10),
+                                                    Text(
+                                                      'Acceleration',
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      '4.2s 0-100km/h',
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: Colors.grey,
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ),
                                           ],
-                                        )
+                                        ),
+                                        SizedBox(height: 30),
+                                        // คำอธิบายรถ
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'Car description',
+                                              style: TextStyle(
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                                fontFamily: 'Montserrat',
+                                              ),
+                                            ),
+                                            IconButton(
+                                              onPressed: () {
+                                                // Handle edit action
+                                              },
+                                              icon: const Icon(
+                                                  Icons.mode_edit_outlined),
+                                              color: Color(0xFF191919),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 10),
+                                        // รายละเอียดคำอธิบาย
+                                        Text(
+                                          '           Luxury plug-in hybrid sedan featuring a 3.0-liter inline-six turbocharged engine paired with an electric motor, delivering a combined output of 490 horsepower and 700 Nm of torque. It offers xDrive all-wheel drive, an electric-only range of 50-60 km, and a 0-100 km/h time of 4.8 seconds. Equipped with an 8-speed automatic transmission, adaptive air suspension, and advanced hybrid technology, it provides a smooth, powerful, and efficient driving experience.',
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.grey,
+                                            fontFamily: 'Montserrat',
+                                          ),
+                                        ),
+                                        SizedBox(height: 20),
+                                        Text(
+                                          'Date borrow - return',
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                            fontFamily: 'Montserrat',
+                                          ),
+                                        ),
+                                        SizedBox(height: 10),
+                                        Column(
+                                          children: [
+                                            // ปุ่มให้เลือกวันที่
+                                            OutlinedButton(
+                                              onPressed: () {},
+                                              style: OutlinedButton.styleFrom(
+                                                backgroundColor: Colors.white,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 30,
+                                                        vertical: 15),
+                                                side: const BorderSide(
+                                                    color: Colors.grey),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(50),
+                                                ),
+                                                minimumSize:
+                                                    Size(double.infinity, 50),
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  const Text(
+                                                    'Date borrow',
+                                                    style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: 16,
+                                                        fontFamily:
+                                                            'Montserrat'),
+                                                  ),
+                                                  Icon(Icons.calendar_today,
+                                                      color: Colors.grey),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(height: 10),
+                                            OutlinedButton(
+                                              onPressed: () {},
+                                              style: OutlinedButton.styleFrom(
+                                                backgroundColor: Colors.white,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 30,
+                                                        vertical: 15),
+                                                side: const BorderSide(
+                                                    color: Colors.grey),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(50),
+                                                ),
+                                                minimumSize:
+                                                    Size(double.infinity, 50),
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  const Text(
+                                                    'Date return',
+                                                    style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: 16,
+                                                        fontFamily:
+                                                            'Montserrat'),
+                                                  ),
+                                                  Icon(Icons.calendar_today,
+                                                      color: Colors.grey),
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(height: 10),
+                                            Divider(
+                                              thickness: 1,
+                                              color: Colors.grey,
+                                            ),
+                                            SizedBox(height: 10),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                RichText(
+                                                  text: TextSpan(
+                                                    children: [
+                                                      TextSpan(
+                                                        text: 'THB 3500',
+                                                        style: TextStyle(
+                                                          fontSize: 24,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.black,
+                                                          fontFamily:
+                                                              'Montserrat',
+                                                        ),
+                                                      ),
+                                                      TextSpan(
+                                                        text: ' / day',
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: Colors.black,
+                                                          fontFamily:
+                                                              'Montserrat',
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                // ปุ่มเช่ารถ
+                                                ElevatedButton(
+                                                  onPressed: () {
+                                                    _showConfirmationDialog(context);
+                                                  },
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    backgroundColor:
+                                                        Colors.black,
+                                                  ),
+                                                  child: Text(
+                                                    'Save change',
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.white,
+                                                      fontFamily: 'Montserrat',
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),
@@ -837,7 +668,8 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
                 );
                 break;
               case 2:
-                showModalBottomSheet( //dashboard ก็อปตัวนี้ได้เลย
+                showModalBottomSheet(
+                  //dashboard ก็อปตัวนี้ได้เลย
                   context: context,
                   backgroundColor: Colors.transparent,
                   builder: (BuildContext context) {
@@ -888,197 +720,292 @@ class _AdminrequestborrowcareditState extends State<Adminrequestborrowcaredit> {
     );
   }
 
-  void _handleCarSelectTap(BuildContext context, String carName) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('You selected $carName'),
-      ),
+  void _showCompleteDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
+          contentPadding: const EdgeInsets.all(20),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.check_circle_outline_rounded,
+                size: 150,
+                color: Color.fromARGB(255, 113, 218, 116),
+              ),
+              const SizedBox(height: 5),
+              const Text(
+                'Complete!',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Montserrat',
+                ),
+              ),
+              const SizedBox(height: 5),
+              const Text(
+                'You have change the information!',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.black,
+                  fontFamily: 'Montserrat',
+                ),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.center, // จัดให้อยู่ตรงกลาง
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      // Close the current dialog
+                      Navigator.of(context).pop();
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: BorderSide(color: Colors.black), // Black border
+                      ),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10), // ปรับขนาดภายในปุ่ม
+                    ),
+                    child: const Text(
+                      "OK",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _showConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
+          contentPadding: const EdgeInsets.all(20),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.error_outline_outlined,
+                size: 150,
+                color: Color.fromARGB(255, 252, 185, 84),
+              ),
+              const SizedBox(height: 5),
+              const Text(
+                'Are you sure?',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Montserrat',
+                ),
+              ),
+              const SizedBox(height: 5),
+              const Text(
+                'You want to change the information?',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.black,
+                  fontFamily: 'Montserrat',
+                ),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.center, // จัดให้อยู่ตรงกลาง
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Close the current dialog
+                      Navigator.of(context).pop();
+                      // Show Complete Dialog after Yes is pressed
+                      _showCompleteDialog(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 35, vertical: 10), // ปรับขนาดภายในปุ่ม
+                    ),
+                    child: const Text(
+                      "Yes",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 8), // เพิ่มระยะห่างระหว่างปุ่ม
+                  TextButton(
+                    onPressed: () {
+                      // Close the current dialog
+                      Navigator.of(context).pop();
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        side: BorderSide(color: Colors.black), // Black border
+                      ),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10), // ปรับขนาดภายในปุ่ม
+                    ),
+                    child: const Text(
+                      "Cancel",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
 
-class DashboardWidget extends StatelessWidget { //dashboard ก็อปตัวนี้ได้เลย
+class DashboardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Align(
+      alignment: Alignment.bottomCenter, // จัดตำแหน่งที่ล่างกลาง
       child: Container(
-        height: 500, // Adjust height as needed
+        height: 400, // ปรับความสูงตามต้องการ
         width: 500,
         padding: const EdgeInsets.all(16),
         decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
+            topLeft: Radius.circular(35),
+            topRight: Radius.circular(35),
           ),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Row(
-              children: [
-                Text(
-                  'Dashboard',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF191919),
+            const Padding(
+              padding: EdgeInsets.only(left: 16), // ปรับ padding ด้านซ้ายที่นี่
+              child: Row(
+                children: [
+                  Text(
+                    'Dashboard',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF191919),
+                      fontFamily: 'Montserrat',
+                    ),
                   ),
-                ),
-                Icon(Icons.bar_chart_outlined)
-              ],
+                  Icon(
+                    Icons.bar_chart_outlined,
+                    size: 27,
+                  )
+                ],
+              ),
             ),
-            const SizedBox(height: 16),
-            Row(
-              // หน้าป๊อปอัพที่ขึ้นมาของ dashboard
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 150,
-                  height: 150,
-                  //กล่องแรก
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.grey, width: 2),
-                  ),
-                  child: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.check_circle,
-                        color: Colors.green,
-                        size: 24,
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'Total Car available',
-                        style: TextStyle(
-                          fontSize: 14,
-                        ),
-                      ),
-                      Text(
-                        '> 11',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 20),
-                Container(
-                  width: 150,
-                  height: 150,
-                  //กล่องสอง
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.grey, width: 2),
-                  ),
-                  child: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.cancel,
-                        color: Colors.red,
-                        size: 24,
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'Total Car unavailable',
-                        style: TextStyle(
-                          fontSize: 14,
-                        ),
-                      ),
-                      Text(
-                        '> 7',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  width: 150,
-                  height: 150,
-                  //กล่องสาม
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.grey, width: 2),
-                  ),
-                  child: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.open_in_new,
-                        color: Colors.orange,
-                        size: 24,
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'Total Rent',
-                        style: TextStyle(
-                          fontSize: 14,
-                        ),
-                      ),
-                      Text(
-                        '> 13',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
+                // กล่องแรก
+                buildDashboardCard(
+                  icon: Icons.check_circle,
+                  color: Colors.green,
+                  title: 'Total Car available',
+                  value: '> 11',
                 ),
-                const SizedBox(width: 20),
-                Container(
-                  width: 150,
-                  height: 150,
-                  //กล่องสี่
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.grey, width: 2),
-                  ),
-                  child: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        Icons.access_time,
-                        color: Colors.black,
-                        size: 24,
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'Total Pending',
-                        style: TextStyle(
-                          fontSize: 14,
-                        ),
-                      ),
-                      Text(
-                        '> 6',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
+                const SizedBox(width: 10),
+                // กล่องสอง
+                buildDashboardCard(
+                  icon: Icons.cancel,
+                  color: Colors.red,
+                  title: 'Total Car unavailable',
+                  value: '> 7',
                 ),
               ],
-            )
+            ),
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // กล่องสาม
+                buildDashboardCard(
+                  icon: Icons.open_in_new,
+                  color: Colors.orange,
+                  title: 'Total Rent',
+                  value: '> 13',
+                ),
+                const SizedBox(width: 10),
+                // กล่องสี่
+                buildDashboardCard(
+                  icon: Icons.access_time,
+                  color: Colors.black,
+                  title: 'Total Pending',
+                  value: '> 6',
+                ),
+              ],
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget buildDashboardCard(
+      {required IconData icon,
+      required Color color,
+      required String title,
+      required String value}) {
+    return Container(
+      width: 190,
+      height: 152,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(color: Colors.grey, width: 1),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, color: color, size: 60),
+          const SizedBox(height: 5),
+          Text(title,
+              style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Montserrat')),
+          Text(value,
+              style: const TextStyle(
+                  fontSize: 23,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Montserrat')),
+        ],
       ),
     );
   }
