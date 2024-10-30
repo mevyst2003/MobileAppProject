@@ -6,59 +6,71 @@ const { raw } = require('mysql2');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/password/:raw', (req, res) => {
-    const raw = req.params.raw;
-    bcrypt.hash(raw, 10, (err, hash) => {
-        if (err) {
-            return res.status(500).send('Hash error');
-        }
-        res.send(hash);
-    });
-});
-
 app.post('/register', (req, res) => {
-    const { username, password } = req.body;
-    const sql = 'INSERT INTO users (username, password) VALUES(?,?)';
+    const { username, password, email } = req.body;
+    const sql = 'INSERT INTO user (username,email, password) VALUES(?,?,?)';
     bcrypt.hash(password, 10, (err, hash) => {
         if (err) {
             return res.status(500).send('Hash error');
         }
-        con.query(sql, [username, hash], (err) => {
+        con.query(sql, [username, email, hash], (err) => {
             if (err) {
                 return res.status(500).send('Database error');
             }
-
             res.status(200).send('Insert done');
         });
     });
 });
 
-app.post('/login', (req, res) => {
-    const { username, password } = req.body; 
-    const sql = 'SELECT id, password FROM users WHERE username = ?';
+app.post("/login", (req, res) => {
+    const { username, password } = req.body;
+    const sql = "SELECT user_id, password, role FROM user WHERE username = ?";
     con.query(sql, [username], (err, results) => {
         if (err) {
-            console.log(err);
-            return res.status(500).send('DB error');
+            console.error(err);
+            return res.status(500).json({ error: "Database server error" });
         }
-        if (results.length != 1) {
-            return res.status(400).send('Wrong username');
+        if (results.length !== 1) {
+            return res.status(401).json({ error: "Wrong username" });
         }
-        const user = results[0];
-        const hash = user.password;
-        bcrypt.compare(password, hash, (err, same) => {
+
+        bcrypt.compare(password, results[0].password, (err, same) => {
             if (err) {
-                console.log(err);
-                return res.status(500).send('Server error');
+                console.error(err);
+                return res.status(500).json({ error: "Authentication server error" });
             }
             if (same) {
-                // Send the user_id as part of the response
-                res.json({ message: 'Login OK', user_id: user.id });
+                return res.status(200).json({
+                    message: "Login successful",
+                    user_id: results[0].user_id,
+                    role: results[0].role 
+                });
             } else {
-                res.status(400).send('Wrong password');
+                return res.status(401).json({ error: "Wrong password" });
             }
         });
     });
+});
+
+
+
+app.get("/assetlist", function (req, res) {
+    let filePath;
+    const userRole = req.session.role;
+    switch (userRole) {
+        case "admin":
+            filePath = path.join(__dirname, "views", "staff", "adminAssetlist.dart");
+            break;
+        case "lender":
+            filePath = path.join(__dirname, "views", "lender", "lenderAssetlist.dart");
+            break;
+        case "borrower":
+            filePath = path.join(__dirname, "views", "borrower", "Cartypelist1.dart");
+            break;
+        default:
+            return res.status(404).send("Page not found");
+    }
+    res.sendFile(filePath);
 });
 
 

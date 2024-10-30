@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:mobileappproject/Admin/adminAssetlist.dart';
 import 'package:mobileappproject/Borrower/Cartypelist1.dart';
 import 'package:mobileappproject/Lender/lenderAssetlist.dart';
 import 'package:mobileappproject/home.dart';
 import 'package:mobileappproject/register.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -12,11 +16,77 @@ class Login extends StatefulWidget {
   State<Login> createState() => _Login2State();
 }
 
+Future<void> fetchData() async {
+  final response = await http.get(Uri.parse(
+      'http://localhost/phpmyadmin/index.php?route=/database/structure&db=hertzrental'));
+
+  if (response.statusCode == 200) {
+    var data = jsonDecode(response.body);
+    print(data);
+  } else {
+    throw Exception('Failed to load data');
+  }
+}
+
 class _Login2State extends State<Login> {
+  final String url = "rndqn-49-48-39-220.a.free.pinggy.link";
+  bool isWaiting = false;
+
   final TextEditingController loginController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool sP = true;
   String? _errorMessage; // Change to String to hold specific error messages
+
+
+  Future<void> _login(String username,String password) async {
+    setState(() {
+      _errorMessage = null;
+    });
+
+    if (username.isEmpty || password.isEmpty) {
+      setState(() {
+        _errorMessage = "Please enter both username and password";
+      });
+      return;
+    }
+
+    try {
+      Uri uri = Uri.https(url, '/login');
+
+      Map account = {
+        'username': username,
+        'password': password,
+      };
+
+      http.Response response = await http.post(uri, body: account).timeout(
+            const Duration(seconds: 10),
+          );
+
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+        // Use the role to navigate to different pages
+        String role = data['role'];
+        if (role == 'admin') {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const Adminassetlist()));
+        } else if (role == 'lender') {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const Lenderassetlist()));
+        } else {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const Cartypelist1()));
+        }
+      } else {
+        setState(() {
+          _errorMessage = jsonDecode(response.body)['error'];
+        });
+      }
+    } catch (error) {
+      setState(() {
+        _errorMessage = "An error occurred. Please try again later.";
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -179,28 +249,29 @@ class _Login2State extends State<Login> {
                     } else if (password.isEmpty) {
                       _errorMessage = "Please enter your password";
                     } else {
-                      if (login == "admin" && password == "admin") {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Adminassetlist(),
-                          ),
-                        );
-                        } else if (login == "lender" && password == "lender") {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Lenderassetlist(), 
-                          ),
-                        );
-                      } else {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Cartypelist1(),
-                          ),
-                        );
-                      }
+                      _login(login, password);
+                      // if (login == "admin" && password == "admin") {
+                      //   Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => const Adminassetlist(),
+                      //     ),
+                      //   );
+                      // } else if (login == "lender" && password == "lender") {
+                      //   Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => const Lenderassetlist(),
+                      //     ),
+                      //   );
+                      // } else {
+                      //   Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => const Cartypelist1(),
+                      //     ),
+                      //   );
+                      // }
                     }
 
                     // Update state to reflect changes

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobileappproject/login.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -9,11 +11,13 @@ class Register extends StatefulWidget {
 }
 
 class _Register2State extends State<Register> {
+  final String url = "rndqn-49-48-39-220.a.free.pinggy.link";
+  bool isWaiting = false;
+
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final TextEditingController confirmPasswordController =TextEditingController();
 
   bool sP = true;
   String? _errorMessage;
@@ -92,6 +96,51 @@ class _Register2State extends State<Register> {
     );
   }
 
+  void popDialog(message) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Text(message),
+          );
+        });
+  }
+
+  void register(String username, String password, String email) async {
+    setState(() {
+      isWaiting = true;
+    });
+
+    try {
+      Uri uri = Uri.https(url, '/register');
+
+      Map account = {
+        'username': username,
+        'password': password,
+        'email': email
+      };
+
+      http.Response response = await http.post(uri, body: account).timeout(
+            const Duration(seconds: 10),
+          );
+      if (response.statusCode == 200) {
+        _showCompletionDialog(context);
+      } else {
+        popDialog(response.body);
+      }
+    } on TimeoutException catch (e) {
+      debugPrint(e.message);
+      popDialog('Timeout error!');
+    } catch (e) {
+      debugPrint(e.toString());
+      popDialog('Unknown error!');
+    } finally {
+      setState(() {
+        isWaiting = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var filledButton = FilledButton(
@@ -115,7 +164,7 @@ class _Register2State extends State<Register> {
           _errorMessage = "Passwords do not match.";
         } else {
           // Show completion dialog if validation passes
-          _showCompletionDialog(context);
+          register(username, password, email);
         }
 
         setState(() {}); // Update the UI
@@ -362,8 +411,7 @@ class _Register2State extends State<Register> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => const Login()),
+                        MaterialPageRoute(builder: (context) => const Login()),
                       );
                     },
                     child: const Text(
