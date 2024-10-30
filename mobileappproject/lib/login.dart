@@ -16,6 +16,7 @@ class Login extends StatefulWidget {
   State<Login> createState() => _Login2State();
 }
 
+
 Future<void> fetchData() async {
   final response = await http.get(Uri.parse(
       'http://localhost/phpmyadmin/index.php?route=/database/structure&db=hertzrental'));
@@ -250,28 +251,6 @@ class _Login2State extends State<Login> {
                       _errorMessage = "Please enter your password";
                     } else {
                       _login(login, password);
-                      // if (login == "admin" && password == "admin") {
-                      //   Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) => const Adminassetlist(),
-                      //     ),
-                      //   );
-                      // } else if (login == "lender" && password == "lender") {
-                      //   Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) => const Lenderassetlist(),
-                      //     ),
-                      //   );
-                      // } else {
-                      //   Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) => const Cartypelist1(),
-                      //     ),
-                      //   );
-                      // }
                     }
 
                     // Update state to reflect changes
@@ -292,44 +271,6 @@ class _Login2State extends State<Login> {
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 25),
-              const Row(
-                children: [
-                  Expanded(
-                    child: Divider(
-                      thickness: 1,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      "OR CONTINUE WITH",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'Montserrat',
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Divider(
-                      thickness: 1,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildSocialButton('assets/images/facebook_logo.png'),
-                  const SizedBox(width: 20),
-                  _buildSocialButton('assets/images/google_logo.png'),
-                  const SizedBox(width: 20),
-                  _buildSocialButton('assets/images/apple_logo.png'),
-                ],
               ),
               const SizedBox(height: 90),
               Row(
