@@ -16,7 +16,6 @@ app.get('/password/:raw', (req, res) => {
     });
 });
 
-
 app.post('/register', (req, res) => {
     const { username, password } = req.body;
     const sql = 'INSERT INTO users (username, password) VALUES(?,?)';
@@ -33,7 +32,6 @@ app.post('/register', (req, res) => {
         });
     });
 });
-
 
 app.post('/login', (req, res) => {
     const { username, password } = req.body; 
@@ -62,6 +60,7 @@ app.post('/login', (req, res) => {
         });
     });
 });
+
 
 app.listen(3000, () => {
     console.log("Server is running");
