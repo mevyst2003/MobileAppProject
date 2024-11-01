@@ -16,7 +16,6 @@ class Login extends StatefulWidget {
   State<Login> createState() => _Login2State();
 }
 
-
 Future<void> fetchData() async {
   final response = await http.get(Uri.parse(
       'http://localhost/phpmyadmin/index.php?route=/database/structure&db=hertzrental'));
@@ -30,7 +29,7 @@ Future<void> fetchData() async {
 }
 
 class _Login2State extends State<Login> {
-  final String url = "rndqn-49-48-39-220.a.free.pinggy.link";
+  final String url = "rnwpd-223-205-197-130.a.free.pinggy.link";
   bool isWaiting = false;
 
   final TextEditingController loginController = TextEditingController();
@@ -38,8 +37,7 @@ class _Login2State extends State<Login> {
   bool sP = true;
   String? _errorMessage; // Change to String to hold specific error messages
 
-
-  Future<void> _login(String username,String password) async {
+  Future<void> _login(String username, String password) async {
     setState(() {
       _errorMessage = null;
     });

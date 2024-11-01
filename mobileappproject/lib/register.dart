@@ -5,13 +5,12 @@ import 'dart:async';
 
 class Register extends StatefulWidget {
   const Register({super.key});
-
   @override
   State<Register> createState() => _Register2State();
 }
 
 class _Register2State extends State<Register> {
-  final String url = "rndqn-49-48-39-220.a.free.pinggy.link";
+  final String url = "rntnl-223-205-197-130.a.free.pinggy.link";
   bool isWaiting = false;
 
   final TextEditingController usernameController = TextEditingController();

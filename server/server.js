@@ -6,6 +6,7 @@ const { raw } = require('mysql2');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 app.post('/register', (req, res) => {
     const { username, password, email } = req.body;
     const sql = 'INSERT INTO user (username,email, password) VALUES(?,?,?)';
@@ -52,27 +53,18 @@ app.post("/login", (req, res) => {
     });
 });
 
-
-
-app.get("/assetlist", function (req, res) {
-    let filePath;
-    const userRole = req.session.role;
-    switch (userRole) {
-        case "admin":
-            filePath = path.join(__dirname, "views", "staff", "adminAssetlist.dart");
-            break;
-        case "lender":
-            filePath = path.join(__dirname, "views", "lender", "lenderAssetlist.dart");
-            break;
-        case "borrower":
-            filePath = path.join(__dirname, "views", "borrower", "Cartypelist1.dart");
-            break;
-        default:
-            return res.status(404).send("Page not found");
-    }
-    res.sendFile(filePath);
+app.get("/getAsset/:cartype", (req,res)=>{
+    const cartype = req.params.cartype
+    const sql = "SELECT * FROM `assetlist` WHERE car_type = ?";
+    con.query(sql, [cartype], (err,results)=>{
+        if(err){
+            console.error(err);
+            return res.status(500).json({error: "Database server error"});
+        }
+        // console.log(results);
+        return res.status(200).json(results);
+    })
 });
-
 
 app.listen(3000, () => {
     console.log("Server is running");

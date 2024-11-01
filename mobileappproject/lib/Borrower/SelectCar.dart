@@ -1,14 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mobileappproject/Borrower/Cartypelist1.dart';
 import 'package:mobileappproject/Borrower/History.dart';
 import 'package:mobileappproject/Borrower/RequestBorrowCar.dart';
 import 'package:mobileappproject/login.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
 
 class Selectcar extends StatelessWidget {
   final String carType;
 
   const Selectcar({super.key, required this.carType});
+  final String url = "rnwpd-223-205-197-130.a.free.pinggy.link";
 
   void _showLogoutDialog(BuildContext context) {
     showDialog(
@@ -58,7 +63,8 @@ class Selectcar extends StatelessWidget {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(13.0),
                 ),
@@ -81,7 +87,8 @@ class Selectcar extends StatelessWidget {
             OutlinedButton(
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: Colors.black),
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(13.0),
                 ),
@@ -104,57 +111,47 @@ class Selectcar extends StatelessWidget {
     );
   }
 
-  List<Widget> buildCarList(BuildContext context, String carType) {
-    return [
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-        child: _buildCarTypeCard(
-          context,
-          imagePath: 'assets/images/$carType.png',
-          carType: carType,
-          carBrand: 'Toyota',
-          carModel: 'Avalon Trim',
-          carPrice: 1500,
-          imageWidth: 340,
-          imageHeight: 120,
-          carStatus: Colors.green,
-        ),
-      ),
-      const SizedBox(height: 16),
+  Future<List<Widget>> buildCarList(
+      BuildContext context, String carType) async {
+    Uri uri = Uri.https(url, '/getAsset/$carType');
+    try {
+      http.Response response =
+          await http.get(uri).timeout(const Duration(seconds: 10));
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+        List<Widget> carWidgets = [];
+        for (var car in data) {
+          carWidgets.add(
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 25.0,
+                  vertical: 10.0), // Add vertical padding here
+              child: _buildCarTypeCard(
+                context,
+                imagePath: 'assets/images/${car['car_type']}.png',
+                carType: car['car_type'],
+                carBrand: car['car_brand'],
+                carModel: car['car_model'],
+                carPrice: car['car_price'],
+                imageWidth: 340,
+                imageHeight: 120,
+                carStatus: car['car_status'] == 'Available'
+                    ? Colors.green
+                    : Colors.red,
+              ),
+            ),
+          );
+        }
 
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-        child: _buildCarTypeCard(
-          context,
-          imagePath: 'assets/images/$carType.png',
-          carType: carType,
-          carBrand: 'Toyota',
-          carModel: 'Avalon Trim',
-          carPrice: 1500,
-          imageWidth: 340,
-          imageHeight: 120,
-          carStatus: Colors.red,
-        ),
-      ),
-      const SizedBox(height: 16),
-
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-        child: _buildCarTypeCard(
-          context,
-          imagePath: 'assets/images/$carType.png',
-          carType: carType,
-          carBrand: 'Toyota',
-          carModel: 'Avalon Trim',
-          carPrice: 1500,
-          imageWidth: 340,
-          imageHeight: 120,
-          carStatus: Colors.green,
-        ),
-      ),
-      const SizedBox(height: 16),
-
-    ];
+        return carWidgets;
+      } else {
+        print('Error: ${response.statusCode}');
+        return [];
+      }
+    } catch (e) {
+      print('Exception: $e');
+      return [];
+    }
   }
 
   @override
@@ -245,136 +242,138 @@ class Selectcar extends StatelessWidget {
         ),
         child: Container(
           color: Colors.white,
-          child: ListView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 24.0, left: 32.0, right: 16.0),
-                child: Text(
-                  'Choose your $carType car',
-                  style: const TextStyle(
-                    fontSize: 24,
-                    color: Color(0xFF191919),
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Montserrat',
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              ...buildCarList(context, carType),
-            ],
+          child: FutureBuilder<List<Widget>>(
+            future:
+                buildCarList(context, carType), // Call the async method here
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                    child:
+                        CircularProgressIndicator()); // Show loading indicator
+              } else if (snapshot.hasError) {
+                return Center(
+                    child: Text('Error: ${snapshot.error}')); // Handle error
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return const Center(
+                    child: Text(
+                        'No cars available for this type.')); // Handle no data
+              } else {
+                return ListView(
+                  children: snapshot.data!, // Use the list of car widgets
+                );
+              }
+            },
           ),
         ),
       ),
     );
   }
-}
 
-Widget _buildCarTypeCard(
-  BuildContext context, {
-  required String imagePath,
-  required String carType,
-  required String carModel,
-  required int carPrice,
-  required String carBrand,
-  required double imageWidth,
-  required double imageHeight,
-  required Color carStatus,
-}) {
-  return GestureDetector(
-    onTap: () {
-      _handleCarSelectTap(context, carType);
-    },
-    child: Container(
-      height: 210, // Adjust height as needed
-      decoration: BoxDecoration(
-        color: const Color(0xFFE8E8F2),
-        borderRadius: BorderRadius.circular(30),
+  Widget _buildCarTypeCard(
+    BuildContext context, {
+    required String imagePath,
+    required String carType,
+    required String carModel,
+    required int carPrice,
+    required String carBrand,
+    required double imageWidth,
+    required double imageHeight,
+    required Color carStatus,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        _handleCarSelectTap(context, carType);
+      },
+      child: Container(
+        height: 210, // Adjust height as needed
+        decoration: BoxDecoration(
+          color: const Color(0xFFE8E8F2),
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 20),
+            Center(
+              child: SizedBox(
+                width: 350,
+                child: Row(
+                  children: [
+                    Icon(Icons.circle, size: 12, color: carStatus),
+                    const SizedBox(width: 5),
+                    Text(
+                      carBrand,
+                      style: const TextStyle(
+                        color: Color(0xFF191919),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                    const Spacer(),
+                    Text(
+                      "\THB $carPrice",
+                      style: const TextStyle(
+                        color: Color(0xFF191919),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Center(
+              child: SizedBox(
+                width: 350,
+                child: Row(
+                  children: [
+                    Text(
+                      carModel, // Display the car model here
+                      style: const TextStyle(
+                        color: Color.fromARGB(255, 163, 163, 163),
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                    const Spacer(),
+                    const Text(
+                      "day",
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 163, 163, 163),
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Montserrat',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Center(
+              child: SizedBox(
+                width: imageWidth,
+                height: imageHeight,
+                child: Image.asset(
+                  imagePath,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 20),
-          Center(
-            child: SizedBox(
-              width: 350,
-              child: Row(
-                children: [
-                  Icon(Icons.circle, size: 12, color: carStatus),
-                  const SizedBox(width: 5),
-                  Text(
-                    carBrand,
-                    style: const TextStyle(
-                      color: Color(0xFF191919),
-                      fontSize: 18,
-                      fontWeight: FontWeight.w900,
-                      fontFamily: 'Montserrat',
-                    ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    "\THB $carPrice",
-                    style: const TextStyle(
-                      color: Color(0xFF191919),
-                      fontSize: 18,
-                      fontWeight: FontWeight.w900,
-                      fontFamily: 'Montserrat',
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Center(
-            child: SizedBox(
-              width: 350,
-              child: Row(
-                children: [
-                  Text(
-                    carModel, // Display the car model here
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 163, 163, 163),
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Montserrat',
-                    ),
-                  ),
-                  const Spacer(),
-                  Text(
-                    "day",
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 163, 163, 163),
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Montserrat',
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Center(
-            child: SizedBox(
-              width: imageWidth,
-              height: imageHeight,
-              child: Image.asset(
-                imagePath,
-                fit: BoxFit.contain,
-              ),
-            ),
-          ),
-        ],
+    );
+  }
+
+  void _handleCarSelectTap(BuildContext context, String carName) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const Requestborrowcar(),
       ),
-    ),
-  );
-}
-
-
-
-void _handleCarSelectTap(BuildContext context, String carName) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => const Requestborrowcar(),
-    ),
-  );
+    );
+  }
 }
